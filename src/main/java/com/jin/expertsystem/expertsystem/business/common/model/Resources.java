@@ -1,37 +1,38 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table ( name ="resources" )
 public class Resources {
 
-  private long resourceId;
-  private String resourceName;
-  private String resourceUrl;
 
+	/**
+	 * 资源id
+	 */
+   	@Column(name = "resource_id" )
+	private Integer resourceId;
 
-  public long getResourceId() {
-    return resourceId;
-  }
+	/**
+	 * 资源名称
+	 */
+   	@Column(name = "resource_name" )
+	private String resourceName;
 
-  public void setResourceId(long resourceId) {
-    this.resourceId = resourceId;
-  }
-
-
-  public String getResourceName() {
-    return resourceName;
-  }
-
-  public void setResourceName(String resourceName) {
-    this.resourceName = resourceName;
-  }
-
-
-  public String getResourceUrl() {
-    return resourceUrl;
-  }
-
-  public void setResourceUrl(String resourceUrl) {
-    this.resourceUrl = resourceUrl;
-  }
+	/**
+	 * 资源url，需填入后端接口的地址
+	 */
+   	@Column(name = "resource_url" )
+	private String resourceUrl;
 
 }

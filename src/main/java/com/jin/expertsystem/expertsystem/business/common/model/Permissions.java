@@ -1,37 +1,38 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table ( name ="permissions" )
 public class Permissions {
 
-  private long permissionId;
-  private String permissionName;
-  private String permissionCode;
 
+	/**
+	 * 权限id
+	 */
+   	@Column(name = "permission_id" )
+	private Integer permissionId;
 
-  public long getPermissionId() {
-    return permissionId;
-  }
+	/**
+	 * 权限名称
+	 */
+   	@Column(name = "permission_name" )
+	private String permissionName;
 
-  public void setPermissionId(long permissionId) {
-    this.permissionId = permissionId;
-  }
-
-
-  public String getPermissionName() {
-    return permissionName;
-  }
-
-  public void setPermissionName(String permissionName) {
-    this.permissionName = permissionName;
-  }
-
-
-  public String getPermissionCode() {
-    return permissionCode;
-  }
-
-  public void setPermissionCode(String permissionCode) {
-    this.permissionCode = permissionCode;
-  }
+	/**
+	 * 权限编码
+	 */
+   	@Column(name = "permission_code" )
+	private String permissionCode;
 
 }

@@ -13,27 +13,33 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table ( name ="role_permission" )
-public class RolePermission {
+@Table ( name ="users" )
+public class Users {
 
 
 	/**
-	 * 角色权限id
+	 * id主键
 	 */
    	@Column(name = "id" )
 	@Id
-	private Integer id;
+	private String id;
 
 	/**
-	 * 角色id
+	 * 用户名
 	 */
-   	@Column(name = "role_id" )
-	private Integer roleId;
+   	@Column(name = "username" )
+	private String username;
 
 	/**
-	 * 权限id
+	 * 密码
 	 */
-   	@Column(name = "permission_id" )
-	private Integer permissionId;
+   	@Column(name = "password" )
+	private String password;
+
+	/**
+	 * 类型
+	 */
+   	@Column(name = "type" )
+	private Integer type;
 
 }

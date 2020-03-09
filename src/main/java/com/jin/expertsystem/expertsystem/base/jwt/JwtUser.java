@@ -1,9 +1,10 @@
 package com.jin.expertsystem.expertsystem.base.jwt;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rcisoft.officesystem.business.common.model.Permissions;
+import com.jin.expertsystem.expertsystem.business.common.model.Permissions;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -52,7 +53,9 @@ public class JwtUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> lists = new ArrayList<>();
-        lists.addAll(permissionsList);
+        for (Permissions permissions : permissionsList) {
+            lists.add(new SimpleGrantedAuthority(permissions.getPermissionCode()));
+        }
         return lists;
     }
 

@@ -1,12 +1,12 @@
 package com.jin.expertsystem.expertsystem.base.security;
 
-import com.rcisoft.officesystem.business.sysmanagement.model.PathPermission;
-import com.rcisoft.officesystem.utils.Utils;
+import com.jin.expertsystem.expertsystem.business.sysmanagement.model.PathPermission;
+import com.jin.expertsystem.expertsystem.utils.Utils;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.rcisoft.officesystem.base.security.MyFilterInvocationSecurityMetadataSource.urlPerMap;
+import static com.jin.expertsystem.expertsystem.base.security.MyFilterInvocationSecurityMetadataSource.urlPerMap;
 
 /**
  * @author GaoLiwei

@@ -1,7 +1,7 @@
 package com.jin.expertsystem.expertsystem.base.security;
 
-import com.rcisoft.officesystem.base.result.Result;
-import com.rcisoft.officesystem.base.result.ResultCode;
+import com.jin.expertsystem.expertsystem.base.result.Result;
+import com.jin.expertsystem.expertsystem.base.result.ResultCode;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 

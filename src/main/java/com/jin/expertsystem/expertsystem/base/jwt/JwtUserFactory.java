@@ -1,8 +1,10 @@
 package com.jin.expertsystem.expertsystem.base.jwt;
 
-import com.rcisoft.officesystem.business.common.model.Permissions;
-import com.rcisoft.officesystem.business.common.model.Users;
+import com.jin.expertsystem.expertsystem.business.common.model.Permissions;
+import com.jin.expertsystem.expertsystem.business.common.model.Users;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -20,8 +22,8 @@ public final class JwtUserFactory {
      */
     public static JwtUser create(Users user, List<Permissions> permissionsList){
         return new JwtUser(
-                user.getUserId(),
-                user.getLoginName(),
+                user.getId(),
+                user.getUsername(),
                 user.getPassword(),
                 permissionsList
         );

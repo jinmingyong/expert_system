@@ -1,37 +1,36 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table ( name ="permission_resource" )
 public class PermissionResource {
 
-  private long id;
-  private long permissionId;
-  private long resourceId;
 
+   	@Column(name = "id" )
+	@Id
+	private Integer id;
 
-  public long getId() {
-    return id;
-  }
+	/**
+	 * 权限id
+	 */
+   	@Column(name = "permission_id" )
+	private Integer permissionId;
 
-  public void setId(long id) {
-    this.id = id;
-  }
-
-
-  public long getPermissionId() {
-    return permissionId;
-  }
-
-  public void setPermissionId(long permissionId) {
-    this.permissionId = permissionId;
-  }
-
-
-  public long getResourceId() {
-    return resourceId;
-  }
-
-  public void setResourceId(long resourceId) {
-    this.resourceId = resourceId;
-  }
+	/**
+	 * 资源id
+	 */
+   	@Column(name = "resource_id" )
+	private Integer resourceId;
 
 }

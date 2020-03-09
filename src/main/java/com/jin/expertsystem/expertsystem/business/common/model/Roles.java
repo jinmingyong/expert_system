@@ -1,57 +1,50 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table ( name ="roles" )
 public class Roles {
 
-  private long roleId;
-  private String roleNumber;
-  private String roleName;
-  private String roleFeatures;
-  private long roleStatus;
 
+	/**
+	 * 角色id
+	 */
+   	@Column(name = "role_id" )
+	private Integer roleId;
 
-  public long getRoleId() {
-    return roleId;
-  }
+	/**
+	 * 角色编号
+	 */
+   	@Column(name = "role_number" )
+	private String roleNumber;
 
-  public void setRoleId(long roleId) {
-    this.roleId = roleId;
-  }
+	/**
+	 * 角色名称
+	 */
+   	@Column(name = "role_name" )
+	private String roleName;
 
+	/**
+	 * 角色功能展示
+	 */
+   	@Column(name = "role_features" )
+	private String roleFeatures;
 
-  public String getRoleNumber() {
-    return roleNumber;
-  }
-
-  public void setRoleNumber(String roleNumber) {
-    this.roleNumber = roleNumber;
-  }
-
-
-  public String getRoleName() {
-    return roleName;
-  }
-
-  public void setRoleName(String roleName) {
-    this.roleName = roleName;
-  }
-
-
-  public String getRoleFeatures() {
-    return roleFeatures;
-  }
-
-  public void setRoleFeatures(String roleFeatures) {
-    this.roleFeatures = roleFeatures;
-  }
-
-
-  public long getRoleStatus() {
-    return roleStatus;
-  }
-
-  public void setRoleStatus(long roleStatus) {
-    this.roleStatus = roleStatus;
-  }
+	/**
+	 * 状态（0：禁用，1：可用（默认值））
+	 */
+   	@Column(name = "role_status" )
+	private Integer roleStatus;
 
 }

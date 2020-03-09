@@ -1,37 +1,39 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table ( name ="permission_menu" )
 public class PermissionMenu {
 
-  private long id;
-  private long permissionId;
-  private long menuId;
 
+	/**
+	 * id
+	 */
+   	@Column(name = "id" )
+	@Id
+	private Integer id;
 
-  public long getId() {
-    return id;
-  }
+	/**
+	 * 权限id，用来和权限表的id做关联
+	 */
+   	@Column(name = "permission_id" )
+	private Integer permissionId;
 
-  public void setId(long id) {
-    this.id = id;
-  }
-
-
-  public long getPermissionId() {
-    return permissionId;
-  }
-
-  public void setPermissionId(long permissionId) {
-    this.permissionId = permissionId;
-  }
-
-
-  public long getMenuId() {
-    return menuId;
-  }
-
-  public void setMenuId(long menuId) {
-    this.menuId = menuId;
-  }
+	/**
+	 * 菜单id，用来和菜单表的id做关联
+	 */
+   	@Column(name = "menu_id" )
+	private Integer menuId;
 
 }

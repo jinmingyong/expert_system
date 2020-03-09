@@ -1,87 +1,68 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table ( name ="menus" )
 public class Menus {
 
-  private long menuId;
-  private String menuName;
-  private String routeName;
-  private String menuUrl;
-  private String iconName;
-  private long parentId;
-  private long showStatus;
-  private long displaySequence;
 
+	/**
+	 * 菜单id
+	 */
+   	@Column(name = "menu_id" )
+	private Integer menuId;
 
-  public long getMenuId() {
-    return menuId;
-  }
+	/**
+	 * 菜单名称
+	 */
+   	@Column(name = "menu_name" )
+	private String menuName;
 
-  public void setMenuId(long menuId) {
-    this.menuId = menuId;
-  }
+	/**
+	 * 路由name
+	 */
+   	@Column(name = "route_name" )
+	private String routeName;
 
+	/**
+	 * 菜单url，需填入前端页面对应的前端路由地址，如果是父级菜单节点，则可以不填url
+	 */
+   	@Column(name = "menu_url" )
+	private String menuUrl;
 
-  public String getMenuName() {
-    return menuName;
-  }
+	/**
+	 * icon参数
+	 */
+   	@Column(name = "icon_name" )
+	private String iconName;
 
-  public void setMenuName(String menuName) {
-    this.menuName = menuName;
-  }
+	/**
+	 * 父级菜单id
+	 */
+   	@Column(name = "parent_id" )
+	private Integer parentId;
 
+	/**
+	 * 是否在左侧显示，1：显示，0：不显示，默认1
+	 */
+   	@Column(name = "show_status" )
+	private Integer showStatus;
 
-  public String getRouteName() {
-    return routeName;
-  }
-
-  public void setRouteName(String routeName) {
-    this.routeName = routeName;
-  }
-
-
-  public String getMenuUrl() {
-    return menuUrl;
-  }
-
-  public void setMenuUrl(String menuUrl) {
-    this.menuUrl = menuUrl;
-  }
-
-
-  public String getIconName() {
-    return iconName;
-  }
-
-  public void setIconName(String iconName) {
-    this.iconName = iconName;
-  }
-
-
-  public long getParentId() {
-    return parentId;
-  }
-
-  public void setParentId(long parentId) {
-    this.parentId = parentId;
-  }
-
-
-  public long getShowStatus() {
-    return showStatus;
-  }
-
-  public void setShowStatus(long showStatus) {
-    this.showStatus = showStatus;
-  }
-
-
-  public long getDisplaySequence() {
-    return displaySequence;
-  }
-
-  public void setDisplaySequence(long displaySequence) {
-    this.displaySequence = displaySequence;
-  }
+	/**
+	 * 显示顺序
+	 */
+   	@Column(name = "display_sequence" )
+	private Integer displaySequence;
 
 }

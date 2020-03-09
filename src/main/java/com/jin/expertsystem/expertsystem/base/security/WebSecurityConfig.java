@@ -1,8 +1,8 @@
 package com.jin.expertsystem.expertsystem.base.security;
 
-import com.rcisoft.officesystem.base.jwt.JwtAuthenticationTokenFilter;
-import com.rcisoft.officesystem.business.sysmanagement.dao.ResourceDao;
-import com.rcisoft.officesystem.business.sysmanagement.model.PathPermission;
+import com.jin.expertsystem.expertsystem.base.jwt.JwtAuthenticationTokenFilter;
+import com.jin.expertsystem.expertsystem.business.sysmanagement.dao.ResourceDao;
+import com.jin.expertsystem.expertsystem.business.sysmanagement.model.PathPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
