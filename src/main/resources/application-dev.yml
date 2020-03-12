@@ -57,11 +57,11 @@ pagehelper:
   reasonable: true
 
 #jwt相关信息
-jwt:
-  requestHeader: Authorization
-  secret: mySecret
-  expiration: 604800
-  tokenHeader: "Bearer "
+#jwt:
+#  requestHeader: Authorization
+#  secret: mySecret
+#  expiration: 604800
+#  tokenHeader: "Bearer "
 
 
 #指定log4j2的配置文件
@@ -74,69 +74,4 @@ swagger:
 #用户默认密码
 user:
   pwd : "123456"
-#导入模板表头
-titles:
-  user:
-    excelTitle:
-    - "工号"
-    - "用户姓名"
-    - "性别"
-    - "政治面貌"
-    - "职务"
-    - "隶属单位"
-    - "联系方式"
-  organization:
-    excelTitle:
-    - "父级组织"
-    - "组织名称"
 
-#Excel文件名
-excelFileName:
-  userExcelName: "用户信息导入模板"
-  organizationExcelName: "组织信息导入模板"
-
-#Zip名称
-zip:
-  achievementExcelZip: "活动成绩信息"
-  studentAchievementZip: "学生个人成绩单"
-
-#PDF
-pdf:
-  watermark: "天津师范大学"
-  title: "天津师范大学本科生第二课堂成绩单"
-
-#pdf临时文件目录
-tempDir: "D:/usr/tempPdf/"
-tempBeforeWaterMark: "D:/usr/tempWaterBefore/"
-
-tempExcelDir: "/usr/tempExcel/"
-
-#图片存储路径
-picture:
-  studentHead:
-    savePath: "D:/usr/tempPic/studentPic/"
-    visitPath: "http://129.28.178.202:8080/studentPic/"
-  eventPost:
-    savePath: "D:/usr/tempPic/eventPost/"
-    visitPath: "http://129.28.178.202:8080/eventPost/"
-  form:
-    savePath: "D:/usr/tempPic/formPic/"
-    visitPath: "http://129.28.178.202:8080/formPic/"
-#附件存储路径
-document:
-  eventAttachment:
-    savePath: "D:/usr/tempDoc/eventAttachment/"
-  societyCharter:
-    savePath: "D:/usr/tempDoc/societyCharter/"
-  achievementDocument:
-    savePath: "D:/usr/tempDoc/achievementDocument/"
-  applicantDocument:
-    savePath: "D:/usr/tempDoc/applicantDocument/"
-  mission:
-    savePath: "D:/usr/tempDoc/mission/"
-  form:
-    savePath: "D:/usr/tempDoc/formPic/"
-#富文本html存储路径
-editor:
-   html:
-    savePath: "D:/usr/tempHtml/"
