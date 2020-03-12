@@ -42,4 +42,22 @@ public class Users {
    	@Column(name = "type" )
 	private Integer type;
 
+	/**
+	 * 性别
+	 */
+   	@Column(name = "sex" )
+	private String sex;
+
+	/**
+	 * 电话号
+	 */
+   	@Column(name = "phone" )
+	private String phone;
+
+	/**
+	 * 状态，0：不可用，1：可用
+	 */
+   	@Column(name = "status" )
+	private String status;
+
 }

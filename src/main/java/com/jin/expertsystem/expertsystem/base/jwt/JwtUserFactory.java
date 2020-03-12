@@ -2,9 +2,7 @@ package com.jin.expertsystem.expertsystem.base.jwt;
 
 import com.jin.expertsystem.expertsystem.business.common.model.Permissions;
 import com.jin.expertsystem.expertsystem.business.common.model.Users;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
 import java.util.List;
 
 

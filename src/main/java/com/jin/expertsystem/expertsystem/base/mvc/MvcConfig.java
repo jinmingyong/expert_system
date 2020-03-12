@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-/*import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.AuthenticationException;*/
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,7 +55,7 @@ public class MvcConfig implements WebMvcConfigurer {
      * @author GaoLiWei
      * @date 13:51 2019/4/15
      **/
-   /* @Override
+    @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
         exceptionResolvers.add((HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) -> {
                     Result result = new Result();
@@ -93,7 +93,7 @@ public class MvcConfig implements WebMvcConfigurer {
                     return new ModelAndView();
                 }
         );
-    }*/
+    }
 
     private void responseResult(HttpServletResponse response, Result result) {
         response.setCharacterEncoding("UTF-8");
