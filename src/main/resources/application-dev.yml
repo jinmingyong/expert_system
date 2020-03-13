@@ -57,11 +57,11 @@ pagehelper:
   reasonable: true
 
 #jwt相关信息
-#jwt:
-#  requestHeader: Authorization
-#  secret: mySecret
-#  expiration: 604800
-#  tokenHeader: "Bearer "
+jwt:
+  requestHeader: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHeader: "Bearer "
 
 
 #指定log4j2的配置文件

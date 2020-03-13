@@ -22,7 +22,7 @@ public class ResultDetailedInfo {
 	 */
    	@Column(name = "id" )
 	@Id
-	private Integer id;
+	private String id;
 
 	/**
 	 * 抽取结果id
