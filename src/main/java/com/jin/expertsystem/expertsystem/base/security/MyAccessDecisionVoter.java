@@ -9,8 +9,7 @@ import org.springframework.security.web.FilterInvocation;
 import java.util.Collection;
 
 /**
- * @author GaoLiwei
- * @date 2019/5/8
+ * RoleVoter角色投票
  */
 public class MyAccessDecisionVoter implements AccessDecisionVoter<Object> {
     @Override

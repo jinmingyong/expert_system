@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author GaoLiwei
- * @date 2019/4/15
+ * 重写UserDetailsService 的方法
  */
 @Primary
 @Service
@@ -29,6 +28,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private CommonUsersDao commonUsersDao;
 
 
+    /*1.通过username 获得信息
+    * 2.通过User(UserDetails)返回UserDetails
+    * */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users users = new Users();

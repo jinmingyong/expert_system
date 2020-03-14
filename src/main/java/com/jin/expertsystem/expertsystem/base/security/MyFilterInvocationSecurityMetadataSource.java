@@ -17,6 +17,7 @@ import java.util.Map;
 public class MyFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
 
+    //用来做类URLs字符串匹配
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     public static Map<String, String> urlPerMap = new HashMap<>();

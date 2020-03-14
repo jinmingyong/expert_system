@@ -31,8 +31,8 @@ import java.util.List;
  * @date 2019/4/15
  */
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity /*启动Spring Security*/
+@EnableGlobalMethodSecurity(prePostEnabled = true) /*会拦截注解了@PreAuthrize注解的配置*/
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired

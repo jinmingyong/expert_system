@@ -47,6 +47,7 @@ public class Utils {
                             break;
                         }
                     }
+                    //获得此类的get方法
                     String methodName = "get" + name.substring(0, 1).toUpperCase() + name.substring(1);
                     method = aClass.getMethod(methodName);
                     Object key = method.invoke(list.get(i));

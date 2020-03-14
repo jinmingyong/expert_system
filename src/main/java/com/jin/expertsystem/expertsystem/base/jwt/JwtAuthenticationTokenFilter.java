@@ -47,12 +47,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             //得到token
             final String authToken = authHeader.substring(tokenHeader.length());
             //从token中得到用户名
-            String userNumber = jwtTokenUtil.getUsernameFromToken(authToken);
-            logger.info("checking authentication " + userNumber);
+            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            logger.info("checking authentication " + username);
             //当前用户不为空并且当前线程中没有当前访问者的信息
-            if (userNumber != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 //获得当前用户信息
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userNumber);
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 //当token没有过期，正常处理
                 if (jwtTokenUtil.validateToken(authToken)) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
