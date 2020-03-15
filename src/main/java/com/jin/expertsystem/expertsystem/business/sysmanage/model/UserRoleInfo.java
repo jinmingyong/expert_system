@@ -11,6 +11,7 @@ import javax.persistence.Id;
  * @author jinmingyong
  * @date 2020/3/13 17:28
  */
+//自己定义的用户和角色实体
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

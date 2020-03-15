@@ -54,9 +54,10 @@ public class JwtUser implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> lists = new ArrayList<>();
         for (Permissions p:permissionsList
-             ) {
+        ) {
             lists.add(new SimpleGrantedAuthority(p.getPermissionCode()));
         }
+
         return lists;
     }
 

@@ -12,12 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author GaoLiwei
- * @date 2019/4/15
+ * @author jinmingyong
+ * @date 2020/3/14 23:20
  */
 @Component
 public class JwtTokenUtil implements Serializable {
-
     private static final long serialVersionUID = -3301605591108950415L;
 
     private static final String CLAIM_KEY_USER_ID = "userId";
@@ -32,7 +31,7 @@ public class JwtTokenUtil implements Serializable {
 
     /**
      * 通过token获得username
-    * @param token
+     * @param token
      * @return String
      */
     public String getUsernameFromToken(String token) {
@@ -179,4 +178,3 @@ public class JwtTokenUtil implements Serializable {
         return !isTokenExpired(token);
     }
 }
-

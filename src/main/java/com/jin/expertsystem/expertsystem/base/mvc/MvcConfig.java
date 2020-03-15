@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,12 +59,12 @@ public class MvcConfig implements WebMvcConfigurer {
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
         exceptionResolvers.add((HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) -> {
                     Result result = new Result();
-                  /*  if (handler instanceof HandlerMethod) {
+                    if (handler instanceof HandlerMethod) {
                         HandlerMethod handlerMethod = (HandlerMethod) handler;
                         if (e instanceof AuthenticationException) {
                             //密码错误
                             result.setCode(ResultCode.UNAUTHORIZED.code);
-                            result.setMsg(e.getMessage());
+                            result.setMsg("密码错误");
                         } else if (e instanceof AccessDeniedException) {
                             //无权限 @PreAuthorize("hasRole('ROLE_1001')")
                             result.setCode(ResultCode.UNAUTHORIZED.code);
@@ -77,7 +79,7 @@ public class MvcConfig implements WebMvcConfigurer {
                                     e.getMessage());
                             log.error(message, e);
                         }
-                    } else {*/
+                    } else {
                         if (e instanceof NoHandlerFoundException) {
                             result.setCode(ResultCode.NOT_FOUND.code);
                             result.setMsg("接口 [" + request.getRequestURI() + "] 不存在");
@@ -86,7 +88,7 @@ public class MvcConfig implements WebMvcConfigurer {
                             result.setMsg(e.getMessage());
                             log.error(e.getMessage(), e);
                         }
-             //       }
+                  }
                     responseResult(response, result);
                     return new ModelAndView();
                 }
