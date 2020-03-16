@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.util.List;
 
 /**
@@ -22,7 +23,25 @@ public class MenuDto {
     /**
      * 菜单名称
      */
-    private String meunName;
+    private String menuName;
+
+    /**
+     * 菜单url
+     */
+    private String menuUrl;
+
+
+    private Integer parentId;
+
+    /**
+     * 是否在左侧显示，1：显示，0：不显示，默认1
+     */
+    private Integer showStatus;
+
+    /**
+     * 显示顺序
+     */
+    private Integer displaySequence;
 
     /**
      * 子集菜单，可以为N级

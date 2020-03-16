@@ -45,6 +45,23 @@ public class JwtTokenUtil implements Serializable {
         return username;
     }
 
+
+    /**
+     * 通过token获得userId
+     * @param token
+     * @return String
+     */
+    public String getUserIdFromToken(String token) {
+        String userId;
+        try {
+            final Claims claims = getClaimsFromToken(token);
+            userId = (String) claims.get("userId");
+        } catch (Exception e) {
+            userId = null;
+        }
+        return userId;
+    }
+
     /**
      *  在token中获得创建时间
      * @param token

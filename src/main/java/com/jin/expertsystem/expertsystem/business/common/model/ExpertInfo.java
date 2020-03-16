@@ -139,6 +139,12 @@ public class ExpertInfo {
 	private String status;
 
 	/**
+	 * 评估分数
+	 */
+   	@Column(name = "estimate" )
+	private Double estimate;
+
+	/**
 	 * 头像
 	 */
    	@Column(name = "picture" )
