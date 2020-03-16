@@ -1,18 +1,20 @@
 package com.jin.expertsystem.expertsystem.business.common.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.jin.expertsystem.expertsystem.base.result.Result;
 import com.jin.expertsystem.expertsystem.business.common.model.Users;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonUsersService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.jin.expertsystem.expertsystem.business.common.utils.PageUtils;
+import com.jin.expertsystem.expertsystem.base.result.Result;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import com.github.pagehelper.PageInfo;
 
 
 /**
-* @author LiuYuanJun
-* @date 2020/01/06
+* @author JMY
+* @date 2020/03/17
 */
 @Api(tags = "Users")
 @RestController
@@ -61,7 +63,11 @@ public class CommonUsersController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public PageInfo selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        return commonUsersService.selectAllForPage(pageNum,pageSize);
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        PageUtils pageUtil = new PageUtils();
+        pageUtil.setDataList(commonUsersService.selectAll());
+        pageUtil.setCurrentPage(pageNum);
+        pageUtil.setPageSizes(pageSize);
+        return Result.result(pageUtil.paging());
     }
 }

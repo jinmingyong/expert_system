@@ -2,6 +2,7 @@ package ${basePackage}.${commonPackage}.controller;
 
 import ${basePackage}.${commonPackage}.model.${tableNameUpperCamel};
 import ${basePackage}.${commonPackage}.service.Common${tableNameUpperCamel}Service;
+import ${basePackage}.${commonPackage}.utils.PageUtils;
 import ${resultPackage}.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,11 @@ public class Common${tableNameUpperCamel}Controller {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public PageInfo selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        return common${tableNameUpperCamel}Service.selectAllForPage(pageNum,pageSize);
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        PageUtils pageUtil = new PageUtils();
+        pageUtil.setDataList(common${tableNameUpperCamel}Service.selectAll());
+        pageUtil.setCurrentPage(pageNum);
+        pageUtil.setPageSizes(pageSize);
+        return Result.result(pageUtil.paging());
     }
 }

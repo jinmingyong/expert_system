@@ -11,7 +11,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
 * @author JMY
-* @date 2020/03/09
+* @date 2020/03/17
 */
 @Service
 public class CommonResourcesServiceImpl extends AbstractMyService<Resources> implements CommonResourcesService {

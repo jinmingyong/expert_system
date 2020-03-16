@@ -7,6 +7,7 @@ import ${basePackage}.${commonPackage}.need.MyMapper;
 * @author ${author}
 * @date ${date}
 */
+@Repository
 public interface Common${tableNameUpperCamel}Dao extends MyMapper<${tableNameUpperCamel}> {
 
 }

@@ -1,13 +1,13 @@
 package com.jin.expertsystem.expertsystem.business.common.service;
 
-import com.github.pagehelper.PageInfo;
 import com.jin.expertsystem.expertsystem.business.common.model.Users;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
+import com.github.pagehelper.PageInfo;
 
 
 /**
-* @author LiuYuanJun
-* @date 2020/01/06
+* @author JMY
+* @date 2020/03/17
 */
 public interface CommonUsersService extends MyService<Users> {
 

@@ -1,17 +1,17 @@
 package com.jin.expertsystem.expertsystem.business.common.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonUsersDao;
 import com.jin.expertsystem.expertsystem.business.common.model.Users;
-import com.jin.expertsystem.expertsystem.business.common.need.AbstractMyService;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonUsersService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jin.expertsystem.expertsystem.business.common.need.AbstractMyService;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 /**
-* @author LiuYuanJun
-* @date 2020/01/06
+* @author JMY
+* @date 2020/03/17
 */
 @Service
 public class CommonUsersServiceImpl extends AbstractMyService<Users> implements CommonUsersService {

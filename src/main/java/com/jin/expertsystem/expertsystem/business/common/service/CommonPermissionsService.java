@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
 * @author JMY
-* @date 2020/03/09
+* @date 2020/03/17
 */
 public interface CommonPermissionsService extends MyService<Permissions> {
 

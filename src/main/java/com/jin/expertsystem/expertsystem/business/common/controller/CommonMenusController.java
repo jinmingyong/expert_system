@@ -2,6 +2,7 @@ package com.jin.expertsystem.expertsystem.business.common.controller;
 
 import com.jin.expertsystem.expertsystem.business.common.model.Menus;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonMenusService;
+import com.jin.expertsystem.expertsystem.business.common.utils.PageUtils;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
 * @author JMY
-* @date 2020/03/09
+* @date 2020/03/17
 */
 @Api(tags = "Menus")
 @RestController
@@ -62,7 +63,11 @@ public class CommonMenusController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public PageInfo selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        return commonMenusService.selectAllForPage(pageNum,pageSize);
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        PageUtils pageUtil = new PageUtils();
+        pageUtil.setDataList(commonMenusService.selectAll());
+        pageUtil.setCurrentPage(pageNum);
+        pageUtil.setPageSizes(pageSize);
+        return Result.result(pageUtil.paging());
     }
 }
