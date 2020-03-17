@@ -2,7 +2,7 @@ package ${basePackage}.${commonPackage}.controller;
 
 import ${basePackage}.${commonPackage}.model.${tableNameUpperCamel};
 import ${basePackage}.${commonPackage}.service.Common${tableNameUpperCamel}Service;
-import ${basePackage}.${commonPackage}.utils.PageUtils;
+import ${basePackage}.utils.PageUtils;
 import ${resultPackage}.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;

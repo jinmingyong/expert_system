@@ -31,6 +31,12 @@ public class ExpertInfo {
 	private String name;
 
 	/**
+	 * 年龄
+	 */
+   	@Column(name = "age" )
+	private Integer age;
+
+	/**
 	 * 性别
 	 */
    	@Column(name = "sex" )

@@ -2,9 +2,9 @@ package com.jin.expertsystem.expertsystem.business.common.controller;
 
 import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfo;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonExpertInfoService;
-import com.jin.expertsystem.expertsystem.business.common.utils.PageUtils;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
+import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;

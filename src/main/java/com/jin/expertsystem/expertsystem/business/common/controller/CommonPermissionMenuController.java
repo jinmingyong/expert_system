@@ -2,7 +2,7 @@ package com.jin.expertsystem.expertsystem.business.common.controller;
 
 import com.jin.expertsystem.expertsystem.business.common.model.PermissionMenu;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonPermissionMenuService;
-import com.jin.expertsystem.expertsystem.business.common.utils.PageUtils;
+import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;

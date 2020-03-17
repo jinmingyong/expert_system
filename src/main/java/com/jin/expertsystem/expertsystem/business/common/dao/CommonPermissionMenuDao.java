@@ -2,6 +2,7 @@ package com.jin.expertsystem.expertsystem.business.common.dao;
 
 import com.jin.expertsystem.expertsystem.business.common.model.PermissionMenu;
 import com.jin.expertsystem.expertsystem.business.common.need.MyMapper;
+import org.springframework.stereotype.Repository;
 
 /**
 * @author JMY
