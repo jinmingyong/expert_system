@@ -1,6 +1,7 @@
 package com.jin.expertsystem.expertsystem.business.common.need;
 
 
+import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
@@ -9,5 +10,6 @@ import tk.mybatis.mapper.common.Mapper;
  * @author GaoLiWei
  * @date 2019/04/10
  */
+@Component
 public interface MyMapper<T> extends Mapper<T> {
 }

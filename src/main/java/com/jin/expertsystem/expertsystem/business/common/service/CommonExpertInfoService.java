@@ -3,6 +3,10 @@ package com.jin.expertsystem.expertsystem.business.common.service;
 import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfo;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 
 /**
@@ -18,5 +22,7 @@ public interface CommonExpertInfoService extends MyService<ExpertInfo> {
     * @return PageInfo
     */
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
+
+    List<ExpertInfo> selectExpertInfoByName(String name);
 
 }

@@ -21,6 +21,7 @@ public class ExpertInfo {
 	/**
 	 * 专家id
 	 */
+	@Id
    	@Column(name = "expert_id" )
 	private String expertId;
 

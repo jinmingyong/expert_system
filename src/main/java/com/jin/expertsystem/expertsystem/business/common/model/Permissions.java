@@ -20,6 +20,7 @@ public class Permissions {
 	/**
 	 * 权限id
 	 */
+	@Id
    	@Column(name = "permission_id" )
 	private Integer permissionId;
 

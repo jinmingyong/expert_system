@@ -61,11 +61,11 @@ public class CommonExpertInfoController {
         return Result.result(commonExpertInfoService.selectAll());
     }
 
-    @ApiOperation(value = "分页查询所有")
+    @ApiOperation(value = "模糊分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String name) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonExpertInfoService.selectAll());
+        pageUtil.setDataList(commonExpertInfoService.selectExpertInfoByName(name));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());

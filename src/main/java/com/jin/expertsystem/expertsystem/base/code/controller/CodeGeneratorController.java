@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author GaoLiwei
@@ -37,5 +38,11 @@ public class CodeGeneratorController {
         codeGeneratorManager.genCodeWithSimpleName(tables);
         return "生成成功";
     }
+
+/*    @GetMapping("columns")
+    public Result getColumnsName(){
+        Map<String, String> tableColumnsByCon = connectionUtil.getColumnsNameByCon();
+        return Result.result(tableColumnsByCon);
+    }*/
 
 }

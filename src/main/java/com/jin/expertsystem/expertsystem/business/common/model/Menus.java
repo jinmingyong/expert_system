@@ -20,6 +20,7 @@ public class Menus {
 	/**
 	 * 菜单id
 	 */
+	@Id
    	@Column(name = "menu_id" )
 	private Integer menuId;
 

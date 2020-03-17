@@ -20,6 +20,7 @@ public class Resources {
 	/**
 	 * 资源id
 	 */
+	@Id
    	@Column(name = "resource_id" )
 	private Integer resourceId;
 

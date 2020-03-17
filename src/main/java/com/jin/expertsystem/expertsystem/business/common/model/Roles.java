@@ -20,6 +20,7 @@ public class Roles {
 	/**
 	 * 角色id
 	 */
+	@Id
    	@Column(name = "role_id" )
 	private Integer roleId;
 

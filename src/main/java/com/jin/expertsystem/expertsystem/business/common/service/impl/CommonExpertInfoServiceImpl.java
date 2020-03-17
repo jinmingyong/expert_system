@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
 * @author JMY
 * @date 2020/03/17
@@ -23,6 +25,11 @@ public class CommonExpertInfoServiceImpl extends AbstractMyService<ExpertInfo> i
     public PageInfo selectAllForPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo(commonExpertInfoDao.selectAll());
+    }
+
+    @Override
+    public List<ExpertInfo> selectExpertInfoByName(String name) {
+        return commonExpertInfoDao.selectExpertInfoByName(name);
     }
 
 }

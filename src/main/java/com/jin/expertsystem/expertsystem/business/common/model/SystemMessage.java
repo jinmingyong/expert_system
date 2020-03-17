@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 public class SystemMessage {
 
 
+	@Id
    	@Column(name = "message_id" )
 	private Integer messageId;
 

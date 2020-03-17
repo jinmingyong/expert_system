@@ -21,6 +21,7 @@ public class ProjectInfo {
 	/**
 	 * 项目编号，主键
 	 */
+	@Id
    	@Column(name = "project_id" )
 	private String projectId;
 

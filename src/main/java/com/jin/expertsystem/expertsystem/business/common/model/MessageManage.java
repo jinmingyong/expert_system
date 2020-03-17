@@ -21,6 +21,7 @@ public class MessageManage {
 	/**
 	 * 消息id
 	 */
+	@Id
    	@Column(name = "mes_id" )
 	private String mesId;
 

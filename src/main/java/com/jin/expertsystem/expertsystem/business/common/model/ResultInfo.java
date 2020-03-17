@@ -21,6 +21,7 @@ public class ResultInfo {
 	/**
 	 * 抽取结果id
 	 */
+	@Id
    	@Column(name = "result_id" )
 	private String resultId;
 
