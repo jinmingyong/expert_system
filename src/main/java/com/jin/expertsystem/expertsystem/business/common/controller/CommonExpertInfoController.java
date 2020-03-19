@@ -6,10 +6,16 @@ import com.jin.expertsystem.expertsystem.base.result.Result;
 
 import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import com.github.pagehelper.PageInfo;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 
 /**
@@ -20,6 +26,9 @@ import com.github.pagehelper.PageInfo;
 @RestController
 @RequestMapping("/commonExpertInfoController/")
 public class CommonExpertInfoController {
+
+    @Value("${picture.head.savePath}")
+    String savePath;
 
     @Autowired
     CommonExpertInfoService commonExpertInfoService;
@@ -69,5 +78,23 @@ public class CommonExpertInfoController {
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());
+    }
+
+    @ApiOperation(value = "上传头像")
+    @PostMapping("uploadHead")
+    public Result uploadHead(@RequestBody MultipartFile upload)  {
+        File file=new File(savePath);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+        String filename = upload.getOriginalFilename();//获得名字
+        filename= UUID.randomUUID().toString().replace("-","")+"_"+filename;
+        try {
+            upload.transferTo(new File(savePath + filename));
+            return Result.result(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Result.result(0,filename);
+        }
     }
 }

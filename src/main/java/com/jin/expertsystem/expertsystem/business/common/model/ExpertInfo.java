@@ -52,8 +52,8 @@ public class ExpertInfo {
 	/**
 	 * 民族
 	 */
-   	@Column(name = "nationlity" )
-	private String nationlity;
+   	@Column(name = "nation" )
+	private String nation;
 
 	/**
 	 * 身份证号

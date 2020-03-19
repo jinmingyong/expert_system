@@ -3,9 +3,12 @@ package com.jin.expertsystem.expertsystem.base.security;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.FilterInvocation;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -31,6 +34,13 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             String needPermission = configAttribute.getAttribute();
             System.out.println("访问"+o.toString()+"需要的权限是：" + needPermission);
             //用户所拥有的权限authentication
+            //获得请求方法
+            FilterInvocation filterInvocation = (FilterInvocation) o;
+            String methonTyep = filterInvocation.getRequest().getMethod();
+            //如果是OPTIONS请求，则不需要权限
+            if ("OPTIONS".equals(methonTyep)){
+                return ;
+            }
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for(GrantedAuthority ga : authorities) {
                 if(needPermission.equals(ga.getAuthority())) {

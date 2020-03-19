@@ -75,4 +75,9 @@ swagger:
 user:
   pwd : "123456"
 
+picture:
+  head:
+    savePath: "E:/work/pic/"
+    visitPath: "http://localhost:8082/pic"
+
 

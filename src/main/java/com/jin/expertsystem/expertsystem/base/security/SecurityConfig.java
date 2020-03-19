@@ -93,6 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/static/js/**","ROLE_ANONYMOUS");
         MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/favicon.ico","ROLE_ANONYMOUS");
         MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/pic/**","ROLE_ANONYMOUS");
         //代码生成不需要权限
         MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/codeGenerator/**","ROLE_ANONYMOUS");
         //更新接口权限的接口不需要权限（正式环境需要权限，开发测试不需要）
@@ -113,7 +114,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //决策当前的访问是否能通过权限验证
     @Bean
     public MyAccessDecisionManager accessDecisionManager() {
-        //所有投票器都通过才允许访问资源
         return new MyAccessDecisionManager();
     }
 
