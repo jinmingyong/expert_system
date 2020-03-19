@@ -78,6 +78,6 @@ user:
 picture:
   head:
     savePath: "E:/work/pic/"
-    visitPath: "http://localhost:8082/pic"
+    visitPath: "http://localhost:8082/pic/"
 
 

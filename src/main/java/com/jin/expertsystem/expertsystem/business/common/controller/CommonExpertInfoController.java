@@ -5,6 +5,7 @@ import com.jin.expertsystem.expertsystem.business.common.service.CommonExpertInf
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
 import com.jin.expertsystem.expertsystem.utils.PageUtils;
+import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,9 @@ public class CommonExpertInfoController {
     @Value("${picture.head.savePath}")
     String savePath;
 
+    @Value("${picture.head.visitPath}")
+    String visitPath;
+
     @Autowired
     CommonExpertInfoService commonExpertInfoService;
 
@@ -37,6 +41,7 @@ public class CommonExpertInfoController {
     @ApiOperation(value = "新增")
     @PostMapping("insert")
     public Result insert(@RequestBody ExpertInfo expertInfo) {
+        expertInfo.setExpertId(Utils.getUUID());
         return Result.result(commonExpertInfoService.insert(expertInfo),"新增成功","新增失败");
     }
 
@@ -91,7 +96,7 @@ public class CommonExpertInfoController {
         filename= UUID.randomUUID().toString().replace("-","")+"_"+filename;
         try {
             upload.transferTo(new File(savePath + filename));
-            return Result.result(filename);
+            return Result.result(visitPath+filename);
         } catch (IOException e) {
             e.printStackTrace();
             return Result.result(0,filename);
