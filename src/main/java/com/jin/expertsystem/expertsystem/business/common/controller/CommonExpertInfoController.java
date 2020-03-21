@@ -96,7 +96,7 @@ public class CommonExpertInfoController {
         filename= UUID.randomUUID().toString().replace("-","")+"_"+filename;
         try {
             upload.transferTo(new File(savePath + filename));
-            return Result.result(visitPath+filename);
+            return Result.result(filename);
         } catch (IOException e) {
             e.printStackTrace();
             return Result.result(0,filename);

@@ -5,6 +5,7 @@ import com.jin.expertsystem.expertsystem.business.common.service.CommonResultDet
 import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
+import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -28,6 +29,7 @@ public class CommonResultDetailedInfoController {
     @ApiOperation(value = "新增")
     @PostMapping("insert")
     public Result insert(@RequestBody ResultDetailedInfo resultDetailedInfo) {
+        resultDetailedInfo.setId(Utils.getUUID());
         return Result.result(commonResultDetailedInfoService.insert(resultDetailedInfo),"新增成功","新增失败");
     }
 

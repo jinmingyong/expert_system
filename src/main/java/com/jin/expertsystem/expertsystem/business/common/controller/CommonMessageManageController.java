@@ -5,6 +5,7 @@ import com.jin.expertsystem.expertsystem.business.common.service.CommonMessageMa
 import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
+import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -28,6 +29,7 @@ public class CommonMessageManageController {
     @ApiOperation(value = "新增")
     @PostMapping("insert")
     public Result insert(@RequestBody MessageManage messageManage) {
+        messageManage.setMesId(Utils.getUUID());
         return Result.result(commonMessageManageService.insert(messageManage),"新增成功","新增失败");
     }
 

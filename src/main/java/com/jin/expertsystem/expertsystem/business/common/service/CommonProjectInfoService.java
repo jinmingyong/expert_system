@@ -3,6 +3,9 @@ package com.jin.expertsystem.expertsystem.business.common.service;
 import com.jin.expertsystem.expertsystem.business.common.model.ProjectInfo;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -18,5 +21,7 @@ public interface CommonProjectInfoService extends MyService<ProjectInfo> {
     * @return PageInfo
     */
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
+
+    List<ProjectInfo> selectProjectInfoByName(String name);
 
 }

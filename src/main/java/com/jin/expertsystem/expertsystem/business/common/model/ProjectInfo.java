@@ -46,8 +46,8 @@ public class ProjectInfo {
 	/**
 	 * 抽取次数
 	 */
-   	@Column(name = "exteact_num" )
-	private Integer exteactNum;
+   	@Column(name = "extract_num" )
+	private Integer extractNum;
 
 	/**
 	 * 补抽次数

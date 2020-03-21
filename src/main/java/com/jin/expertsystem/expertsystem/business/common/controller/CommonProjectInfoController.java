@@ -5,6 +5,7 @@ import com.jin.expertsystem.expertsystem.business.common.service.CommonProjectIn
 import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 
+import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -28,6 +29,7 @@ public class CommonProjectInfoController {
     @ApiOperation(value = "新增")
     @PostMapping("insert")
     public Result insert(@RequestBody ProjectInfo projectInfo) {
+        projectInfo.setProjectId(Utils.getUUID());
         return Result.result(commonProjectInfoService.insert(projectInfo),"新增成功","新增失败");
     }
 
@@ -63,9 +65,9 @@ public class CommonProjectInfoController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String name) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonProjectInfoService.selectAll());
+        pageUtil.setDataList(commonProjectInfoService.selectProjectInfoByName(name));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());
