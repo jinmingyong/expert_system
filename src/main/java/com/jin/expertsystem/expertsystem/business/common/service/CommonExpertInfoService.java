@@ -1,6 +1,7 @@
 package com.jin.expertsystem.expertsystem.business.common.service;
 
 import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfotoShow;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
@@ -23,6 +24,9 @@ public interface CommonExpertInfoService extends MyService<ExpertInfo> {
     */
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
 
-    List<ExpertInfo> selectExpertInfoByName(String name);
+    //模糊查询
+    List<ExpertInfotoShow> selectExpertInfoByName(String name);
+    //根据id查询
+    ExpertInfo selectExpertInfoById(String expertId);
 
 }

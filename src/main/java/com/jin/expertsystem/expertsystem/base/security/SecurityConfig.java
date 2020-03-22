@@ -99,6 +99,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //更新接口权限的接口不需要权限（正式环境需要权限，开发测试不需要）
         MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/menuResourceManagementController/updateUrlPer","ROLE_ANONYMOUS");
 
+        //获得选择的菜单
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonCompanyInfoController/selectAll","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonCompanyInfoController/insert","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonIndustryInfoController/selectAll","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonIndustryInfoController/insert","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonJobgradeInfoController/selectAll","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonJobgradeInfoController/insert","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonMajorInfoController/selectAll","ROLE_ANONYMOUS");
+        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonMajorInfoController/insert","ROLE_ANONYMOUS");
         //所有接口都不需要权限
         //MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/**/**","ROLE_ANONYMOUS");
 

@@ -37,6 +37,9 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             //获得请求方法
             FilterInvocation filterInvocation = (FilterInvocation) o;
             String methonTyep = filterInvocation.getRequest().getMethod();
+            if ("ROLE_ANONYMOUS".equals(needPermission)) {
+                return ;
+            }
             //如果是OPTIONS请求，则不需要权限
             if ("OPTIONS".equals(methonTyep)){
                 return ;

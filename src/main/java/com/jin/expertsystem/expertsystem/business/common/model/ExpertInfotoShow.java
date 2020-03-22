@@ -1,13 +1,13 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Data
@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table ( name ="expert_info" )
-public class ExpertInfo {
+public class ExpertInfotoShow {
 
 
 	/**
@@ -71,13 +71,13 @@ public class ExpertInfo {
 	 * 职称
 	 */
    	@Column(name = "job_grade" )
-	private Integer jobGrade;
+	private String jobGrade;
 
 	/**
 	 * 所属行业
 	 */
    	@Column(name = "industry" )
-	private Integer industry;
+	private String industry;
 
 	/**
 	 * 工作年限
@@ -89,7 +89,7 @@ public class ExpertInfo {
 	 * 工作单位
 	 */
    	@Column(name = "company" )
-	private Integer company;
+	private String company;
 
 	/**
 	 * 学历
@@ -107,7 +107,7 @@ public class ExpertInfo {
 	 * 专业类型
 	 */
    	@Column(name = "major" )
-	private Integer major;
+	private String major;
 
 	/**
 	 * 手机号码

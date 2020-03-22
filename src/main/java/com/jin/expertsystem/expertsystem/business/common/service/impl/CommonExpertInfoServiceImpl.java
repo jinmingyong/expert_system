@@ -2,6 +2,7 @@ package com.jin.expertsystem.expertsystem.business.common.service.impl;
 
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonExpertInfoDao;
 import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfotoShow;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonExpertInfoService;
 import com.jin.expertsystem.expertsystem.business.common.need.AbstractMyService;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,13 @@ public class CommonExpertInfoServiceImpl extends AbstractMyService<ExpertInfo> i
     }
 
     @Override
-    public List<ExpertInfo> selectExpertInfoByName(String name) {
+    public List<ExpertInfotoShow> selectExpertInfoByName(String name) {
         return commonExpertInfoDao.selectExpertInfoByName(name);
+    }
+
+    @Override
+    public ExpertInfo selectExpertInfoById(String expertId) {
+        return commonExpertInfoDao.selectExpertInfoById(expertId);
     }
 
 }
