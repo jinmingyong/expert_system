@@ -49,9 +49,6 @@ public class LoginServiceImpl implements LoginService {
     private CommonRoleUserDao commonRoleUserDao;
 
 
-    @Value("${jwt.tokenHeader}")
-    private String tokenHead;
-
     @Autowired
     LoginDao loginDao;
 

@@ -63,9 +63,9 @@ public class CommonMajorInfoController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String major) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonMajorInfoService.selectAll());
+        pageUtil.setDataList(commonMajorInfoService.selectMajorInfoInfoByName(major));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());

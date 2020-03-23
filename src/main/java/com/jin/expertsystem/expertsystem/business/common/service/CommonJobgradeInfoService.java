@@ -1,5 +1,6 @@
 package com.jin.expertsystem.expertsystem.business.common.service;
 
+import com.jin.expertsystem.expertsystem.business.common.model.IndustryInfo;
 import com.jin.expertsystem.expertsystem.business.common.model.JobgradeInfo;
 import com.jin.expertsystem.expertsystem.business.common.model.MajorInfo;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
@@ -23,5 +24,7 @@ public interface CommonJobgradeInfoService extends MyService<JobgradeInfo> {
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
 
     List<JobgradeInfo> selectAllMajorInfo(Integer status);
+
+    List<JobgradeInfo> selectJobgradeInfoByName(String jobgrade);
 
 }

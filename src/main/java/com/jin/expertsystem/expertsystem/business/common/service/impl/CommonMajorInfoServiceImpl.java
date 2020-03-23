@@ -32,4 +32,9 @@ public class CommonMajorInfoServiceImpl extends AbstractMyService<MajorInfo> imp
         return commonMajorInfoDao.selectAllMajorInfo(status);
     }
 
+    @Override
+    public List<MajorInfo> selectMajorInfoInfoByName(String major) {
+        return commonMajorInfoDao.selectAllMajorInfoByName(major);
+    }
+
 }

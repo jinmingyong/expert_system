@@ -32,4 +32,9 @@ public class CommonIndustryInfoServiceImpl extends AbstractMyService<IndustryInf
         return commonIndustryInfoDao.selectAllIndustryInfo(status);
     }
 
+    @Override
+    public List<IndustryInfo> selectIndustryInfoByName(String industry) {
+        return commonIndustryInfoDao.selectAllIndustryInfoByName(industry);
+    }
+
 }

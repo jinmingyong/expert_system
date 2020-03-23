@@ -1,5 +1,6 @@
 package com.jin.expertsystem.expertsystem.business.common.service;
 
+import com.jin.expertsystem.expertsystem.business.common.model.JobgradeInfo;
 import com.jin.expertsystem.expertsystem.business.common.model.MajorInfo;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
 import com.github.pagehelper.PageInfo;
@@ -25,4 +26,6 @@ public interface CommonMajorInfoService extends MyService<MajorInfo> {
 
     List<MajorInfo> selectAllMajorInfo(Integer status);
 
+
+    List<MajorInfo> selectMajorInfoInfoByName(String major);
 }

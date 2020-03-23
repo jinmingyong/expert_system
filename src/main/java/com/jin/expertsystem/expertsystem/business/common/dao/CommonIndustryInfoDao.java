@@ -24,4 +24,13 @@ public interface CommonIndustryInfoDao extends MyMapper<IndustryInfo> {
             "</script>")
     List<IndustryInfo> selectAllIndustryInfo(@Param("status")Integer status);
 
+    @Select("<script>" +
+            "SELECT\n" +
+            "*\n"+
+            "FROM\n" +
+            "industry_info\n" +
+            "<where><if test=\"industry!=null and industry!=''\" > industry  LIKE '%${industry}%' </if></where>\n"+
+            "</script>")
+    List<IndustryInfo> selectAllIndustryInfoByName(@Param("industry") String industry);
+
 }

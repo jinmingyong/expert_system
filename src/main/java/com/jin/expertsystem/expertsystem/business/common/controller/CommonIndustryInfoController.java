@@ -63,9 +63,9 @@ public class CommonIndustryInfoController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String industry) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonIndustryInfoService.selectAll());
+        pageUtil.setDataList(commonIndustryInfoService.selectIndustryInfoByName(industry));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());

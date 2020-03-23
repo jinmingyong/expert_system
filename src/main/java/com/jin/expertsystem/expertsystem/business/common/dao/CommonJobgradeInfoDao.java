@@ -24,4 +24,13 @@ public interface CommonJobgradeInfoDao extends MyMapper<JobgradeInfo> {
             "</script>")
     List<JobgradeInfo> selectAllJobgradeInfo(@Param("status")Integer status);
 
+    @Select("<script>" +
+            "SELECT\n" +
+            "*\n"+
+            "FROM\n" +
+            "jobgrade_info\n" +
+            "<where><if test=\"jobGrade!=null and jobGrade!=''\" > jobGrade  LIKE '%${jobGrade}%' </if></where>\n"+
+            "</script>")
+    List<JobgradeInfo> selectAllJobgradeInfoByName(@Param("jobGrade") String jobGrade);
+
 }

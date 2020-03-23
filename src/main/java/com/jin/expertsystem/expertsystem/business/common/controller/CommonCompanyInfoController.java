@@ -63,9 +63,9 @@ public class CommonCompanyInfoController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String company) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonCompanyInfoService.selectAll());
+        pageUtil.setDataList(commonCompanyInfoService.selectCompanyInfoByName(company));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());

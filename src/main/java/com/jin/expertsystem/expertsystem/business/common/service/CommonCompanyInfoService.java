@@ -1,6 +1,7 @@
 package com.jin.expertsystem.expertsystem.business.common.service;
 
 import com.jin.expertsystem.expertsystem.business.common.model.CompanyInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfotoShow;
 import com.jin.expertsystem.expertsystem.business.common.model.MajorInfo;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
 import com.github.pagehelper.PageInfo;
@@ -23,5 +24,8 @@ public interface CommonCompanyInfoService extends MyService<CompanyInfo> {
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
 
     List<CompanyInfo> selectAllMajorInfo(Integer status);
+
+    //模糊查询
+    List<CompanyInfo> selectCompanyInfoByName(String company);
 
 }

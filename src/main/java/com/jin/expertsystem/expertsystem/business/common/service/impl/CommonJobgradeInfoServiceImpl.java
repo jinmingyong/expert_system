@@ -32,4 +32,9 @@ public class CommonJobgradeInfoServiceImpl extends AbstractMyService<JobgradeInf
         return commonJobgradeInfoDao.selectAllJobgradeInfo(status);
     }
 
+    @Override
+    public List<JobgradeInfo> selectJobgradeInfoByName(String jobGrade) {
+        return commonJobgradeInfoDao.selectAllJobgradeInfoByName(jobGrade);
+    }
+
 }

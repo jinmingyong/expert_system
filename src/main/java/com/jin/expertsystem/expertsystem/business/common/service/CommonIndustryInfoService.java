@@ -1,5 +1,6 @@
 package com.jin.expertsystem.expertsystem.business.common.service;
 
+import com.jin.expertsystem.expertsystem.business.common.model.CompanyInfo;
 import com.jin.expertsystem.expertsystem.business.common.model.IndustryInfo;
 import com.jin.expertsystem.expertsystem.business.common.model.MajorInfo;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
@@ -23,5 +24,7 @@ public interface CommonIndustryInfoService extends MyService<IndustryInfo> {
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
 
     List<IndustryInfo> selectAllMajorInfo(Integer status);
+
+    List<IndustryInfo> selectIndustryInfoByName(String industry);
 
 }

@@ -24,4 +24,15 @@ public interface CommonCompanyInfoDao extends MyMapper<CompanyInfo> {
             "</script>")
     List<CompanyInfo> selectAllCompanyInfo(@Param("status")Integer status);
 
+    @Select("<script>" +
+            "SELECT\n" +
+            "*\n"+
+            "FROM\n" +
+            "company_info\n" +
+            "<where><if test=\"company!=null and company!=''\" > company  LIKE '%${company}%' </if></where>\n"+
+            "</script>")
+    List<CompanyInfo> selectAllCompanyInfoByName(@Param("company") String company);
+
+
+
 }

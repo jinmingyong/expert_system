@@ -24,4 +24,13 @@ public interface CommonMajorInfoDao extends MyMapper<MajorInfo> {
             "</script>")
     List<MajorInfo> selectAllMajorInfo(@Param("status")Integer status);
 
+    @Select("<script>" +
+            "SELECT\n" +
+            "*\n"+
+            "FROM\n" +
+            "major_info\n" +
+            "<where><if test=\"major!=null and major!=''\" > major  LIKE '%${major}%' </if></where>\n"+
+            "</script>")
+    List<MajorInfo> selectAllMajorInfoByName(@Param("major") String major);
+
 }

@@ -32,4 +32,9 @@ public class CommonCompanyInfoServiceImpl extends AbstractMyService<CompanyInfo>
         return commonCompanyInfoDao.selectAllCompanyInfo(status);
     }
 
+    @Override
+    public List<CompanyInfo> selectCompanyInfoByName(String company) {
+        return commonCompanyInfoDao.selectAllCompanyInfoByName(company);
+    }
+
 }

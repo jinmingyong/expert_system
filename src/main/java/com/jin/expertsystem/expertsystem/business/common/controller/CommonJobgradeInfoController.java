@@ -63,9 +63,9 @@ public class CommonJobgradeInfoController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String jobGrade) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonJobgradeInfoService.selectAll());
+        pageUtil.setDataList(commonJobgradeInfoService.selectJobgradeInfoByName(jobGrade));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());
