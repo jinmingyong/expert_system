@@ -3,11 +3,9 @@ package com.jin.expertsystem.expertsystem.business.sysmanage.service.impl;
 import com.jin.expertsystem.expertsystem.base.jwt.JwtTokenUtil;
 import com.jin.expertsystem.expertsystem.base.security.MyFilterInvocationSecurityMetadataSource;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonMenusDao;
-import com.jin.expertsystem.expertsystem.business.common.dao.CommonRoleUserDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonRolesDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonUsersDao;
 import com.jin.expertsystem.expertsystem.business.common.model.Menus;
-import com.jin.expertsystem.expertsystem.business.common.model.RoleUser;
 import com.jin.expertsystem.expertsystem.business.common.model.Roles;
 import com.jin.expertsystem.expertsystem.business.common.model.Users;
 import com.jin.expertsystem.expertsystem.business.sysmanage.dao.MenuDao;
@@ -18,9 +16,7 @@ import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +41,9 @@ public class MenuResourceManagementServiceImpl implements MenuResourceManagement
     private CommonUsersDao commonUsersDao;
     @Autowired
     private MenuDao menuDao;
+    @Autowired
+    private CommonRolesDao commonRolesDao;
+
 
 
 
@@ -92,6 +91,41 @@ public class MenuResourceManagementServiceImpl implements MenuResourceManagement
 
         return returnUserInfoAndMenu;
     }
+
+    @Override
+    public List<AllResource> selectAllResource(String resourceName) {
+        return resourceDao.selectAllResource(resourceName);
+    }
+
+
+    @Override
+    public List<AllResource> selectAllResourceForTree() {
+        return Utils.bulid(resourceDao.selectAllResource(null));
+    }
+    @Override
+    public List<RoleAllResource> allResourceForTree(String roleName) {
+        List<RoleAllResource> roleAllResources=new ArrayList<>();
+        List<AllResource> list=resourceDao.selectAllResourceByTree(roleName);
+        List<Roles> roles=commonRolesDao.selectAllRolesInfoByName(roleName);
+        for (Roles r:roles
+             ) {
+            RoleAllResource roleAllResource=new RoleAllResource();
+            List<AllResource> fa=new ArrayList<>();
+            roleAllResource.setRoleId(r.getRoleId());
+            roleAllResource.setRoleName(r.getRoleName());
+            roleAllResource.setRoleNumber(r.getRoleNumber());
+            for (AllResource a:list){
+                if (a.getRoleId()==r.getRoleId()){
+                    fa.add(a);
+                }
+            }
+            fa= Utils.bulid(fa);
+            roleAllResource.setAllResources(fa);
+            roleAllResources.add(roleAllResource);
+        }
+        return roleAllResources;
+    }
+
 
     /**
      * 处理主菜单

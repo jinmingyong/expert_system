@@ -65,9 +65,9 @@ public class CommonUsersController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String username) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonUsersService.selectAll());
+        pageUtil.setDataList(commonUsersService.selectAllCompanyInfoByName(username));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());

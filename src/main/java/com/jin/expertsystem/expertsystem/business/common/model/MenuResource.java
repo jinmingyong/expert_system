@@ -13,27 +13,27 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table ( name ="roles" )
-public class Roles {
+@Table ( name ="menu_resource" )
+public class MenuResource {
 
 
 	/**
-	 * 角色id
+	 * 菜单资源id
 	 */
+   	@Column(name = "id" )
 	@Id
-   	@Column(name = "role_id" )
-	private Integer roleId;
+	private Integer id;
 
 	/**
-	 * 角色编号
+	 * 菜单id，用来和菜单表的id做关联
 	 */
-   	@Column(name = "role_number" )
-	private String roleNumber;
+   	@Column(name = "menu_id" )
+	private Integer menuId;
 
 	/**
-	 * 角色名称
+	 * 资源id，用来和资源表的id做关联
 	 */
-   	@Column(name = "role_name" )
-	private String roleName;
+   	@Column(name = "resource_id" )
+	private Integer resourceId;
 
 }

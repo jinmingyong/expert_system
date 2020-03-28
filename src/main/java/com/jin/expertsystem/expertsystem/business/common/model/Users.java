@@ -1,9 +1,6 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +19,7 @@ public class Users {
 	 */
    	@Column(name = "id" )
 	@Id
+	@GeneratedValue(generator = "JDBC")
 	private String id;
 
 	/**
@@ -35,12 +33,6 @@ public class Users {
 	 */
    	@Column(name = "password" )
 	private String password;
-
-	/**
-	 * 类型
-	 */
-   	@Column(name = "type" )
-	private Integer type;
 
 	/**
 	 * 性别

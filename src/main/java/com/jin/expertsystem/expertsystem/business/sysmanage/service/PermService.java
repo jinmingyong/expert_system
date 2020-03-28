@@ -11,6 +11,7 @@ import java.util.List;
  * Created by JiChao on 2019/5/16.
  * 权限管理
  */
+
 public interface PermService {
 
     /**
@@ -47,5 +48,8 @@ public interface PermService {
      * @return
      */
     Result deletePermById(Object id);
+
+
+
 
 }

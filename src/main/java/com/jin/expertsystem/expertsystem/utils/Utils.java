@@ -1,5 +1,6 @@
 package com.jin.expertsystem.expertsystem.utils;
 
+import com.jin.expertsystem.expertsystem.business.sysmanage.model.AllResource;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import java.lang.reflect.Field;
@@ -66,5 +67,29 @@ public class Utils {
             }
         }
         return resultMap;
+    }
+
+
+
+    public static List<AllResource> bulid(List<AllResource> treeNodes) {
+
+        List<AllResource> trees = new ArrayList<AllResource>();
+
+        for (AllResource treeNode : treeNodes) {
+
+            if (0==treeNode.getParentId()) {
+                trees.add(treeNode);
+            }
+
+            for (AllResource it : treeNodes) {
+                if (it.getParentId()==treeNode.getPermissionId() ) {
+                    if (treeNode.getChildren() == null) {
+                        treeNode.setChildren(new ArrayList<AllResource>());
+                    }
+                    treeNode.getChildren().add(it);
+                }
+            }
+        }
+        return trees;
     }
 }

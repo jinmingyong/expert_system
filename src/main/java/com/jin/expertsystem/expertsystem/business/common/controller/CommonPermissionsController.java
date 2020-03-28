@@ -63,9 +63,9 @@ public class CommonPermissionsController {
 
     @ApiOperation(value = "分页查询所有")
     @GetMapping("selectAllForPage")
-    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result selectAllForPage(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String permissionName) {
         PageUtils pageUtil = new PageUtils();
-        pageUtil.setDataList(commonPermissionsService.selectAll());
+        pageUtil.setDataList(commonPermissionsService.selectAllPermissionsInfoByName(permissionName));
         pageUtil.setCurrentPage(pageNum);
         pageUtil.setPageSizes(pageSize);
         return Result.result(pageUtil.paging());

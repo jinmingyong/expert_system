@@ -30,7 +30,6 @@ public interface LoginDao {
     @Select("SELECT\n" +
             "users.username,\n" +
             "users.`password`,\n" +
-            "users.type,\n" +
             "users.sex,\n" +
             "users.phone,\n" +
             "users.`status`,\n" +

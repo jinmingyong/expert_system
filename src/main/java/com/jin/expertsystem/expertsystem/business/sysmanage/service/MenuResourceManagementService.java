@@ -1,6 +1,8 @@
 package com.jin.expertsystem.expertsystem.business.sysmanage.service;
 
+import com.jin.expertsystem.expertsystem.business.sysmanage.model.AllResource;
 import com.jin.expertsystem.expertsystem.business.sysmanage.model.MenuDto;
+import com.jin.expertsystem.expertsystem.business.sysmanage.model.RoleAllResource;
 import com.jin.expertsystem.expertsystem.business.sysmanage.model.UserInfoAndMenu;
 
 import java.util.List;
@@ -31,5 +33,14 @@ public interface MenuResourceManagementService {
      * @return UserInfoAndMenu
      */
     UserInfoAndMenu getUserInfoAndMenu(String token);
+
+
+    // 获得所有的资源
+    List<AllResource> selectAllResource(String resourceName);
+
+    // 获得所有的资源
+    List<AllResource> selectAllResourceForTree();
+
+    List<RoleAllResource> allResourceForTree(String roleName);
 
 }

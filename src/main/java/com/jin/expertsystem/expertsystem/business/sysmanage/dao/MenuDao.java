@@ -29,7 +29,7 @@ public interface MenuDao {
             "role_user\n" +
             "LEFT JOIN role_permission ON role_permission.role_id = role_user.role_id\n" +
             "LEFT JOIN permission_menu ON role_permission.permission_id = permission_menu.permission_id\n" +
-            "LEFT JOIN menus ON permission_menu.menu_id = menus.menu_id\n" +
+            "RIGHT JOIN menus ON permission_menu.menu_id = menus.menu_id\n" +
             "WHERE\n" +
             "role_user.user_id = #{userId}\n"+
             "</script>")

@@ -31,10 +31,6 @@ public class UserRoleInfo {
      */
     private String password;
 
-    /**
-     * 类型
-     */
-    private Integer type;
 
     /**
      * 性别

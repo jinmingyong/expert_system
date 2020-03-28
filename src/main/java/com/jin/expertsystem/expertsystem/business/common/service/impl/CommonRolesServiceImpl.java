@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import java.util.List;
+
 /**
 * @author JMY
 * @date 2020/03/17
@@ -23,6 +25,11 @@ public class CommonRolesServiceImpl extends AbstractMyService<Roles> implements 
     public PageInfo selectAllForPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo(commonRolesDao.selectAll());
+    }
+
+    @Override
+    public List<Roles> selectAllRolesInfoByName(String roleName) {
+        return commonRolesDao.selectAllRolesInfoByName(roleName);
     }
 
 }

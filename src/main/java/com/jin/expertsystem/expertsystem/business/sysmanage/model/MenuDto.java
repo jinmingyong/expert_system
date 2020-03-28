@@ -30,7 +30,9 @@ public class MenuDto {
      */
     private String menuUrl;
 
-
+    /*
+    * 父节点
+    * */
     private Integer parentId;
 
     /**
@@ -52,6 +54,5 @@ public class MenuDto {
      * 该菜单下对应的接口资源
      */
     List<ResourceDto> resourceDtoList;
-
 
 }

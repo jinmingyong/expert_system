@@ -3,6 +3,9 @@ package com.jin.expertsystem.expertsystem.business.common.service;
 import com.jin.expertsystem.expertsystem.business.common.model.Roles;
 import com.jin.expertsystem.expertsystem.business.common.need.MyService;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -18,5 +21,7 @@ public interface CommonRolesService extends MyService<Roles> {
     * @return PageInfo
     */
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
+
+    List<Roles> selectAllRolesInfoByName(String roleName);
 
 }
