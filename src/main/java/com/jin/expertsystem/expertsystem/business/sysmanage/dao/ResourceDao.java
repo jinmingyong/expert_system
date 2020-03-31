@@ -36,12 +36,14 @@ public interface ResourceDao extends Mapper<Resources> {
             "SELECT \n" +
             "temp.permission_id,\n" +
             "`name`,\n" +
+            "url,\n"+
             "parent_id,\n" +
             "type\n" +
             "FROM (\n" +
             "SELECT \n" +
             "permission_id,\n" +
             "menu_name AS name,\n" +
+            "menu_url as url,\n"+
             "parent_id,\n" +
             "IF(parent_id=0,1,2) AS type\n" +
             "FROM\n" +
@@ -50,6 +52,7 @@ public interface ResourceDao extends Mapper<Resources> {
             "SELECT\n" +
             "permission_id,\n" +
             "resource_name,\n" +
+            "resource_url,\n" +
             "IF(menus.menu_id is null,0,menus.menu_id),\n" +
             "3 AS type\n" +
             "FROM\n" +

@@ -158,6 +158,13 @@
             <version>2.1.3.RELEASE</version>
         </dependency>
 
+        <!-- 阿里云-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
 
         <!-- MybatisGenerator生成代码 -->
         <dependency>
