@@ -19,4 +19,6 @@ public interface CommonResultDetailedInfoService extends MyService<ResultDetaile
     */
     PageInfo selectAllForPage(Integer pageNum, Integer pageSize);
 
+
+
 }

@@ -1,17 +1,29 @@
 package com.jin.expertsystem.expertsystem.business.expertExtraction.service.impl;
 
+import com.jin.expertsystem.expertsystem.business.common.dao.CommonProjectInfoDao;
+import com.jin.expertsystem.expertsystem.business.common.dao.CommonResultDetailedInfoDao;
+import com.jin.expertsystem.expertsystem.business.common.dao.CommonResultInfoDao;
 import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.ProjectInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.ResultDetailedInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.ResultInfo;
+import com.jin.expertsystem.expertsystem.business.common.service.CommonProjectInfoService;
+import com.jin.expertsystem.expertsystem.business.common.service.CommonResultDetailedInfoService;
+import com.jin.expertsystem.expertsystem.business.common.service.CommonResultInfoService;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.dao.ExpertExtractionDao;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.model.ExpertExtractionParam;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.service.ExpertExtractionService;
+import com.jin.expertsystem.expertsystem.business.sysmanage.model.SendSmsParam;
+import com.jin.expertsystem.expertsystem.business.sysmanage.service.SendSmsService;
+import com.jin.expertsystem.expertsystem.utils.DFormat;
+import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.mail.MessagingException;
+import java.util.*;
 
 /**
  * @author jinmingyong
@@ -21,6 +33,18 @@ import java.util.Set;
 public class ExpertExtractionServiceImpl implements ExpertExtractionService {
     @Autowired
     private ExpertExtractionDao expertExtractionDao;
+
+    @Autowired
+    private CommonProjectInfoDao commonProjectInfDao;
+
+    @Autowired
+    private CommonResultInfoDao commonResultInfoDao;
+
+    @Autowired
+    private CommonResultDetailedInfoDao commonResultDetailedInfoDao;
+
+    @Autowired
+    private SendSmsService sendSmsService;
 
     @Override
     public List<ExpertInfo> expertExtraction(ExpertExtractionParam expertExtractionParam) {
@@ -49,6 +73,55 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
             newList.add(list.get(k));
         }
         return newList;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Integer sendSms(SendSmsParam sendSmsParam) {
+        // 更新项目信息
+        int i =commonProjectInfDao.updateByPrimaryKey(sendSmsParam.getProjectInfo());
+        // 增加结果表
+        ProjectInfo projectInfo = sendSmsParam.getProjectInfo();
+        ResultInfo resultInfo=new ResultInfo();
+        resultInfo.setResultId(Utils.getUUID());
+        resultInfo.setProId(projectInfo.getProjectId());
+        resultInfo.setType(sendSmsParam.getType());
+        int j = commonResultInfoDao.insert(resultInfo);
+        String resId = resultInfo.getResultId();
+        List<ResultDetailedInfo> list = new ArrayList<>();
+        List<String> emailList = new ArrayList<>();
+        Map<String, Object> mapstring = new HashMap<String, Object>();
+        mapstring.put("createTime",projectInfo.getCreateTime());
+        mapstring.put("projectName",projectInfo.getProName());
+        String msg = DFormat.stringFormatAll(sendSmsParam.getSendText(),mapstring);
+        for (ExpertInfo e:sendSmsParam.getExpertInfo()) {
+            ResultDetailedInfo r=new ResultDetailedInfo();
+            r.setId(Utils.getUUID());
+            r.setExpId(e.getExpertId());
+            r.setResId(resId);
+            for (String id : sendSmsParam.getSendId()
+            ) {
+                if (e.getExpertId().equals(id)){
+                    r.setFlagEmail("3");
+                    emailList.add(e.getEmail());
+                }
+            }
+            list.add(r);
+        }
+
+        int k = commonResultDetailedInfoDao.batchSaveResultDetailed(list);
+        try {
+            sendSmsService.sendEmail(emailList,msg);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        //albudmqrijwlbebf
+        if (i*j*k == 0) {
+            return 0;
+        }else {
+            return 1;
+        }
     }
 
 

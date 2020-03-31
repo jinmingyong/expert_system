@@ -1,9 +1,6 @@
 package com.jin.expertsystem.expertsystem.business.common.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +20,7 @@ public class ResultInfo {
 	 */
 	@Id
    	@Column(name = "result_id" )
+	@GeneratedValue(generator = "JDBC")
 	private String resultId;
 
 	/**

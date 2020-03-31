@@ -3,6 +3,7 @@ package com.jin.expertsystem.expertsystem.business.expertExtraction.controller;
 import com.jin.expertsystem.expertsystem.base.result.Result;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.model.ExpertExtractionParam;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.service.ExpertExtractionService;
+import com.jin.expertsystem.expertsystem.business.sysmanage.model.SendSmsParam;
 import com.jin.expertsystem.expertsystem.utils.PageUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,4 +39,11 @@ public class ExpertExtractionController {
     public Result expertExtractionByRandom(@RequestBody ExpertExtractionParam expertExtractionParam){
         return Result.result(expertExtractionService.expertExtractionByRandom(expertExtractionParam));
     }
+
+    @ApiOperation(value = "发送短信")
+    @PostMapping(value = "sendSms")
+    public Result sendSms(@RequestBody SendSmsParam sendSmsParam) {
+        return Result.result(expertExtractionService.sendSms(sendSmsParam),"发送成功","发送失败");
+    }
+
 }
