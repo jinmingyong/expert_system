@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -70,7 +71,11 @@ public class MvcConfig implements WebMvcConfigurer {
                             //无权限 @PreAuthorize("hasRole('ROLE_1001')")
                             result.setCode(ResultCode.UNAUTHORIZED.code);
                             result.setMsg("无访问权限");
-                        } else {
+                        } else if (e instanceof MessagingException){
+                            result.setCode(ResultCode.UNAUTHORIZED.code);
+                            result.setMsg("邮件发送失败");
+                        }
+                        else {
                             result.setCode(ResultCode.INTERNAL_SERVER_ERROR.code);
                             result.setMsg("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
                             String message = String.format("接口 [%s] 出现异常，方法：%s.%s，异常摘要：%s",

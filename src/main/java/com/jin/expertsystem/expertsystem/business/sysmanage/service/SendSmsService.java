@@ -11,5 +11,5 @@ import java.util.Map;
  * @date 2020/3/30 12:47
  */
 public interface SendSmsService {
-    List<String> sendEmail(List<String> emailList,String msg) throws MessagingException;
+    Boolean sendEmail(String email,String msg) throws MessagingException;
 }

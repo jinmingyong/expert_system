@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -42,8 +43,24 @@ public class ExpertExtractionController {
 
     @ApiOperation(value = "发送短信")
     @PostMapping(value = "sendSms")
-    public Result sendSms(@RequestBody SendSmsParam sendSmsParam) {
-        return Result.result(expertExtractionService.sendSms(sendSmsParam),"发送成功","发送失败");
+    public Result sendSms(@RequestBody SendSmsParam sendSmsParam) throws MessagingException {
+        return Result.result(expertExtractionService.sendSms(sendSmsParam));
+    }
+
+    @ApiOperation(value = "分页查询所有")
+    @GetMapping("selectAllResult")
+    public Result selectAllResult(@RequestParam Integer pageNum, @RequestParam Integer pageSize,@RequestParam String proName) {
+        PageUtils pageUtil = new PageUtils();
+        pageUtil.setDataList(expertExtractionService.selectAllResult(proName));
+        pageUtil.setCurrentPage(pageNum);
+        pageUtil.setPageSizes(pageSize);
+        return Result.result(pageUtil.paging());
+    }
+
+    @ApiOperation(value = "根据id查询结果")
+    @GetMapping("selectResultById")
+    public Result selectResultById(@RequestParam String resId) {
+        return Result.result(expertExtractionService.selectResultById(resId));
     }
 
 }

@@ -19,7 +19,7 @@ import java.util.Properties;
 @Service
 public class SendSmsServiceImpl implements SendSmsService {
 
-    public List<String> sendEmail(List<String> emailList,String msg){
+    public Boolean sendEmail(String email,String msg){
         Properties properties = new Properties();
         properties.put("mail.transport.protocol", "smtp");// 连接协议
         properties.put("mail.smtp.host", "smtp.qq.com");// 主机名
@@ -40,12 +40,7 @@ public class SendSmsServiceImpl implements SendSmsService {
         // 设置发件人邮箱地址
         message.setFrom(new InternetAddress("1060854946@qq.com"));
         // 设置收件人邮箱地址
-        List list = new ArrayList();//不能使用string类型的类型，这样只能发送一个收件人
-            for (int i = 0; i < emailList.size(); i++) {
-                list.add(new InternetAddress(emailList.get(i)));
-                }
-            InternetAddress[] address = (InternetAddress[]) list.toArray(new InternetAddress[list.size()]);
-        message.setRecipients(Message.RecipientType.TO,address);//当邮件有多个收件人时，用逗号隔开
+        message.setRecipient(Message.RecipientType.TO,new InternetAddress(email));//当邮件有多个收件人时，用逗号隔开
 
         message.setSubject("专家库管理系统通知");
         // 设置邮件内容
@@ -59,7 +54,8 @@ public class SendSmsServiceImpl implements SendSmsService {
         transport.close();
         } catch (MessagingException e) {
             e.printStackTrace();
+            return false;
         }
-        return null;
+        return true;
     }
 }

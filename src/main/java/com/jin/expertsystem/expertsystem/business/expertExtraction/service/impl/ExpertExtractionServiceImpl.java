@@ -11,7 +11,9 @@ import com.jin.expertsystem.expertsystem.business.common.service.CommonProjectIn
 import com.jin.expertsystem.expertsystem.business.common.service.CommonResultDetailedInfoService;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonResultInfoService;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.dao.ExpertExtractionDao;
+import com.jin.expertsystem.expertsystem.business.expertExtraction.dao.ResultInfoDao;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.model.ExpertExtractionParam;
+import com.jin.expertsystem.expertsystem.business.expertExtraction.model.ExtractionResultInfo;
 import com.jin.expertsystem.expertsystem.business.expertExtraction.service.ExpertExtractionService;
 import com.jin.expertsystem.expertsystem.business.sysmanage.model.SendSmsParam;
 import com.jin.expertsystem.expertsystem.business.sysmanage.service.SendSmsService;
@@ -23,6 +25,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -45,6 +49,9 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
 
     @Autowired
     private SendSmsService sendSmsService;
+
+    @Autowired
+    private ResultInfoDao resultInfoDao;
 
     @Override
     public List<ExpertInfo> expertExtraction(ExpertExtractionParam expertExtractionParam) {
@@ -77,51 +84,55 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public Integer sendSms(SendSmsParam sendSmsParam) {
+    public String sendSms(SendSmsParam sendSmsParam) throws MessagingException {
         // 更新项目信息
-        int i =commonProjectInfDao.updateByPrimaryKey(sendSmsParam.getProjectInfo());
+        commonProjectInfDao.updateByPrimaryKey(sendSmsParam.getProjectInfo());
         // 增加结果表
         ProjectInfo projectInfo = sendSmsParam.getProjectInfo();
         ResultInfo resultInfo=new ResultInfo();
         resultInfo.setResultId(Utils.getUUID());
         resultInfo.setProId(projectInfo.getProjectId());
         resultInfo.setType(sendSmsParam.getType());
-        int j = commonResultInfoDao.insert(resultInfo);
+        commonResultInfoDao.insertSelective(resultInfo);
         String resId = resultInfo.getResultId();
         List<ResultDetailedInfo> list = new ArrayList<>();
-        List<String> emailList = new ArrayList<>();
         Map<String, Object> mapstring = new HashMap<String, Object>();
-        mapstring.put("createTime",projectInfo.getCreateTime());
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        format.setLenient(false);
+        String time = format.format(projectInfo.getCreateTime());
+        mapstring.put("createTime",time);
         mapstring.put("projectName",projectInfo.getProName());
-        String msg = DFormat.stringFormatAll(sendSmsParam.getSendText(),mapstring);
         for (ExpertInfo e:sendSmsParam.getExpertInfo()) {
             ResultDetailedInfo r=new ResultDetailedInfo();
             r.setId(Utils.getUUID());
             r.setExpId(e.getExpertId());
             r.setResId(resId);
+            r.setFlagEmail("3");
             for (String id : sendSmsParam.getSendId()
             ) {
                 if (e.getExpertId().equals(id)){
-                    r.setFlagEmail("3");
-                    emailList.add(e.getEmail());
+                    mapstring.put("expertName",e.getName());
+                    String msg = DFormat.stringFormatAll(sendSmsParam.getSendText(),mapstring);
+                    Boolean sendStatus = sendSmsService.sendEmail(e.getEmail(),msg);
+                    if (sendStatus == true) r.setFlagEmail("1");
+                    else r.setFlagEmail("0");
                 }
             }
             list.add(r);
         }
 
-        int k = commonResultDetailedInfoDao.batchSaveResultDetailed(list);
-        try {
-            sendSmsService.sendEmail(emailList,msg);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-            return 0;
-        }
-        //albudmqrijwlbebf
-        if (i*j*k == 0) {
-            return 0;
-        }else {
-            return 1;
-        }
+        commonResultDetailedInfoDao.batchSaveResultDetailed(list);
+        return resId;
+    }
+
+    @Override
+    public List<ExtractionResultInfo> selectAllResult(String proName) {
+        return resultInfoDao.selectAllResult(proName);
+    }
+
+    @Override
+    public ExtractionResultInfo selectResultById(String resultId) {
+        return resultInfoDao.selectResultById(resultId);
     }
 
 
