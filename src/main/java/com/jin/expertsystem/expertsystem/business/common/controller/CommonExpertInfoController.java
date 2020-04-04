@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -40,9 +41,8 @@ public class CommonExpertInfoController {
 
     @ApiOperation(value = "新增")
     @PostMapping("insert")
-    public Result insert(@RequestBody ExpertInfo expertInfo) {
-        expertInfo.setExpertId(Utils.getUUID());
-        return Result.result(commonExpertInfoService.insert(expertInfo),"新增成功","新增失败");
+    public Result insert(@RequestBody ExpertInfo expertInfo, HttpServletRequest request) {
+        return Result.result(commonExpertInfoService.insertExpertInfo(expertInfo,request),"新增成功","新增失败");
     }
 
     @ApiOperation(value = "根据实体中的属性删除")

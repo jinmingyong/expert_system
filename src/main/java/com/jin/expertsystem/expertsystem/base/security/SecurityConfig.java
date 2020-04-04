@@ -100,23 +100,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/menuResourceManagementController/updateUrlPer","ROLE_ANONYMOUS");
 
         //获得选择的菜单
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonCompanyInfoController/selectAll","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonCompanyInfoController/insert","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonIndustryInfoController/selectAll","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonIndustryInfoController/insert","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonJobgradeInfoController/selectAll","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonJobgradeInfoController/insert","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonMajorInfoController/selectAll","ROLE_ANONYMOUS");
-        MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/commonMajorInfoController/insert","ROLE_ANONYMOUS");
         //所有接口都不需要权限
         //MyFilterInvocationSecurityMetadataSource.urlPerMap.put("/**/**","ROLE_ANONYMOUS");
 
         //配置访问路径权限
         List<PathPermission> pathPermissionList = resourceDao.listPathPermission();
-            for (PathPermission p:pathPermissionList
-            ) {
-                MyFilterInvocationSecurityMetadataSource.urlPerMap.put(p.getResourceUrl(),p.getPermissionCode());
-            }
+        SecurityUtil.setUrlPer(pathPermissionList);
         return securityMetadataSource;
     }
 

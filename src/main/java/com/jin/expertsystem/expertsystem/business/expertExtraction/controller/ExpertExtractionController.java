@@ -43,8 +43,8 @@ public class ExpertExtractionController {
 
     @ApiOperation(value = "发送短信")
     @PostMapping(value = "sendSms")
-    public Result sendSms(@RequestBody SendSmsParam sendSmsParam) throws MessagingException {
-        return Result.result(expertExtractionService.sendSms(sendSmsParam));
+    public Result sendSms(@RequestBody SendSmsParam sendSmsParam,HttpServletRequest request) throws MessagingException {
+        return Result.result(expertExtractionService.sendSms(sendSmsParam,request));
     }
 
     @ApiOperation(value = "分页查询所有")

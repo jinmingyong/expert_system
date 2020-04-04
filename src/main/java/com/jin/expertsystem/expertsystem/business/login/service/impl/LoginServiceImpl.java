@@ -81,6 +81,7 @@ public class LoginServiceImpl implements LoginService {
         }
         String userId = Utils.getUUID();
         user.setId(userId);
+        user.setStatus("1");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(pwd));
         int insert = commonUsersDao.insert(user);

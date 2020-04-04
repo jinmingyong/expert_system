@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -28,5 +29,7 @@ public interface CommonExpertInfoService extends MyService<ExpertInfo> {
     List<ExpertInfotoShow> selectExpertInfoByName(String name);
     //根据id查询
     ExpertInfo selectExpertInfoById(String expertId);
+    // 添加
+    Integer insertExpertInfo(ExpertInfo expertInfo, HttpServletRequest request);
 
 }

@@ -1,5 +1,7 @@
 package com.jin.expertsystem.expertsystem.business.sysmanage.service.impl;
 
+import com.jin.expertsystem.expertsystem.base.jwt.JwtTokenUtil;
+import com.jin.expertsystem.expertsystem.business.common.dao.CommonMessageManageDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonRoleUserDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonUsersDao;
 import com.jin.expertsystem.expertsystem.business.common.model.RoleUser;
@@ -8,10 +10,13 @@ import com.jin.expertsystem.expertsystem.business.sysmanage.model.UserRoleInfo;
 import com.jin.expertsystem.expertsystem.business.sysmanage.service.UsersService;
 import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author jinmingyong
@@ -19,6 +24,8 @@ import tk.mybatis.mapper.entity.Example;
  */
 @Service
 public class UsersServiceImpl implements UsersService {
+
+
     @Autowired
     private CommonUsersDao commonUsersDao;
     @Autowired
@@ -79,4 +86,5 @@ public class UsersServiceImpl implements UsersService {
         criteria.andEqualTo("userId",roleUser.getUserId());
         return commonRoleUserDao.updateByExampleSelective(roleUser,example);
     }
+
 }

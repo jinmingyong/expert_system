@@ -28,4 +28,13 @@ public interface PersonalDao {
             "WHERE\n" +
             "users.id = #{id}")
     UserRoleInfo selectUserInfoByToken(@Param("id") String id);
+
+    // 根据用户id查询是否有未确认消息
+    @Select("SELECT\n" +
+            "Count(message_manage.mes_id) \n" +
+            "FROM\n" +
+            "message_manage\n" +
+            "WHERE\n" +
+            "status = 0 and message_manage.exp_id = #{expId}")
+    Integer countNewMessageByToken(@Param("expId")String expId);
 }

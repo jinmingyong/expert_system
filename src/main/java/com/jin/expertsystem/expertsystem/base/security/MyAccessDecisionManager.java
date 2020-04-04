@@ -30,14 +30,12 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
         Iterator<ConfigAttribute> iterator = pathPermission.iterator();
         while(iterator.hasNext()) {
             ConfigAttribute configAttribute = iterator.next();
-            //访问所请求资源所需要的权限
-            String needPermission = configAttribute.getAttribute();
-            System.out.println("访问"+o.toString()+"需要的权限是：" + needPermission);
+            String[] permissions = configAttribute.getAttribute().split(",");
             //用户所拥有的权限authentication
             //获得请求方法
             FilterInvocation filterInvocation = (FilterInvocation) o;
             String methonTyep = filterInvocation.getRequest().getMethod();
-            if ("ROLE_ANONYMOUS".equals(needPermission)) {
+            if ("ROLE_ANONYMOUS".equals(permissions)) {
                 return ;
             }
             //如果是OPTIONS请求，则不需要权限
@@ -46,8 +44,11 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             }
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for(GrantedAuthority ga : authorities) {
-                if(needPermission.equals(ga.getAuthority())) {
-                    return;
+                for (String per : permissions) {
+                    System.out.println("访问"+o.toString()+"需要的权限是：" + per);
+                    if (per.equals(ga.getAuthority())) {
+                        return;
+                    }
                 }
             }
         }

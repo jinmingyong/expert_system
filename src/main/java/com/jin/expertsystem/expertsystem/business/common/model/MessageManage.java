@@ -49,4 +49,13 @@ public class MessageManage {
    	@Column(name = "sender_id" )
 	private String senderId;
 
+	@Column(name = "mes_title" )
+	private String mesTitle;
+
+	@Column(name = "res_id" )
+	private String resId;
+
+	@Column(name = "status" )
+	private Integer status;
+
 }

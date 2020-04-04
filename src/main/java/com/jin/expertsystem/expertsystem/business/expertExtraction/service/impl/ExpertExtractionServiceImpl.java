@@ -1,12 +1,11 @@
 package com.jin.expertsystem.expertsystem.business.expertExtraction.service.impl;
 
+import com.jin.expertsystem.expertsystem.base.jwt.JwtTokenUtil;
+import com.jin.expertsystem.expertsystem.business.common.dao.CommonMessageManageDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonProjectInfoDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonResultDetailedInfoDao;
 import com.jin.expertsystem.expertsystem.business.common.dao.CommonResultInfoDao;
-import com.jin.expertsystem.expertsystem.business.common.model.ExpertInfo;
-import com.jin.expertsystem.expertsystem.business.common.model.ProjectInfo;
-import com.jin.expertsystem.expertsystem.business.common.model.ResultDetailedInfo;
-import com.jin.expertsystem.expertsystem.business.common.model.ResultInfo;
+import com.jin.expertsystem.expertsystem.business.common.model.*;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonProjectInfoService;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonResultDetailedInfoService;
 import com.jin.expertsystem.expertsystem.business.common.service.CommonResultInfoService;
@@ -21,10 +20,12 @@ import com.jin.expertsystem.expertsystem.utils.DFormat;
 import com.jin.expertsystem.expertsystem.utils.Utils;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,6 +36,17 @@ import java.util.*;
  */
 @Service
 public class ExpertExtractionServiceImpl implements ExpertExtractionService {
+
+    @Value("${jwt.tokenHeader}")
+    private String tokenHeader;
+
+    @Value("${jwt.requestHeader}")
+    private String requestHeader;
+
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     @Autowired
     private ExpertExtractionDao expertExtractionDao;
 
@@ -52,6 +64,9 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
 
     @Autowired
     private ResultInfoDao resultInfoDao;
+
+    @Autowired
+    private CommonMessageManageDao commonMessageManageDao;
 
     @Override
     public List<ExpertInfo> expertExtraction(ExpertExtractionParam expertExtractionParam) {
@@ -84,7 +99,10 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String sendSms(SendSmsParam sendSmsParam) throws MessagingException {
+    public String sendSms(SendSmsParam sendSmsParam, HttpServletRequest request) throws MessagingException {
+        String token = request.getHeader(requestHeader);
+        String realToken = token.substring(tokenHeader.length());
+        String userId = jwtTokenUtil.getUserIdFromToken(realToken);
         // 更新项目信息
         commonProjectInfDao.updateByPrimaryKey(sendSmsParam.getProjectInfo());
         // 增加结果表
@@ -96,6 +114,7 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
         commonResultInfoDao.insertSelective(resultInfo);
         String resId = resultInfo.getResultId();
         List<ResultDetailedInfo> list = new ArrayList<>();
+        List<MessageManage> messageManageList = new ArrayList<>();
         Map<String, Object> mapstring = new HashMap<String, Object>();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         format.setLenient(false);
@@ -105,14 +124,24 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
         for (ExpertInfo e:sendSmsParam.getExpertInfo()) {
             ResultDetailedInfo r=new ResultDetailedInfo();
             r.setId(Utils.getUUID());
-            r.setExpId(e.getExpertId());
             r.setResId(resId);
             r.setFlagEmail("3");
+            r.setExpId(e.getExpertId());
             for (String id : sendSmsParam.getSendId()
             ) {
                 if (e.getExpertId().equals(id)){
+                    MessageManage m = new MessageManage();
                     mapstring.put("expertName",e.getName());
                     String msg = DFormat.stringFormatAll(sendSmsParam.getSendText(),mapstring);
+                    String mes_msg = msg + "参加请回复！";
+                    m.setExpId(id);
+                    m.setMesContent(mes_msg);
+                    m.setMesTitle("系统消息");
+                    m.setMesId(Utils.getUUID());
+                    m.setResId(resId);
+                    m.setSenderId(userId);
+                    m.setStatus(0);
+                    messageManageList.add(m);
                     Boolean sendStatus = sendSmsService.sendEmail(e.getEmail(),msg);
                     if (sendStatus == true) r.setFlagEmail("1");
                     else r.setFlagEmail("0");
@@ -120,8 +149,8 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
             }
             list.add(r);
         }
-
         commonResultDetailedInfoDao.batchSaveResultDetailed(list);
+        commonMessageManageDao.batchSaveMessageManage(messageManageList);
         return resId;
     }
 

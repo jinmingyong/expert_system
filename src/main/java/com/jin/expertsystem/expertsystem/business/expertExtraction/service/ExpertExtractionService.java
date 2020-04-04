@@ -7,6 +7,7 @@ import com.jin.expertsystem.expertsystem.business.sysmanage.model.SendSmsParam;
 import org.apache.ibatis.annotations.Param;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface ExpertExtractionService {
     // 按条件随机抽取专家
     List<ExpertInfo> expertExtractionByRandom(ExpertExtractionParam expertExtractionParam);
     // 生成结果并发送email
-    String sendSms(SendSmsParam sendSmsParam) throws MessagingException;
+    String sendSms(SendSmsParam sendSmsParam, HttpServletRequest request) throws MessagingException;
     // 查询所有结果
     List<ExtractionResultInfo> selectAllResult(String proName);
     // 根据id查询结果
