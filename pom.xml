@@ -206,7 +206,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.jin.expertsystem.expertsystem.BootApplication</mainClass>
+                    <mainClass>com.jin.expertsystem.expertsystem.ExpertsystemApplication</mainClass>
                     <!--<fork>true</fork> &lt;!&ndash; 如果没有该配置，devtools不会生效 &ndash;&gt;-->
                 </configuration>
             </plugin>

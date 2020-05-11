@@ -1,7 +1,42 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor 挂号员
+participant jsp
+participant Action
+participant Service
+participant Dao
+挂号员->jsp:进入界面
+activate jsp
+jsp->Action:查询所有挂号单
+activate Action
+Action->Service:查询所有挂号单
+activate Service
+Service->Dao:查询所有挂号单
+activate Dao
+Dao-->Service:获得所有挂号单
+deactivate Dao
+Service-->Action:获得所有挂号单
+deactivate Service
+Action-->jsp:获得所有挂号单
+deactivate Action
+jsp-->挂号员:显示所有挂号单
+deactivate jsp
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+挂号员->jsp:点击加急
+activate jsp
+jsp->Action:获得挂号单id
+activate Action
+Action->Service:查询挂号单
+activate Service
+Service->Dao:查询挂号单
+activate Dao
+Dao-->Service:获得挂号单
+Service-->Action:获得挂号单
+Action-->Service:修改挂号单编号
+Service->Dao:修改挂号单编号
+deactivate Dao
+deactivate Service
+Action-->jsp:修改成功
+deactivate Action
+jsp-->挂号员:显示修改信息
+deactivate jsp
 @enduml

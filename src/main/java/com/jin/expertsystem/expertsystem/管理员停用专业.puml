@@ -1,40 +1,36 @@
 @startuml
 actor 管理员
-participant 项目信息页面
-participant ProjectController
-participant ProjectService
-participant ProjectDao
-管理员->项目信息页面:进入界面
-activate 项目信息页面
-项目信息页面->ProjectController:分页查询所有项目信息
-activate ProjectController
-ProjectController->ProjectService:当前页数和显示条数
-activate ProjectService
-ProjectService->ProjectDao:查询全部项目
-activate ProjectDao
-ProjectDao-->ProjectService:返回查询到数据
-deactivate ProjectDao
-ProjectService-->ProjectController:获得项目信息
-deactivate ProjectService
-ProjectController-->项目信息页面:获得项目信息
-deactivate ProjectController
-项目信息页面-->管理员:分页显示项目信息
-deactivate 项目信息页面
+participant 参评专业信息页面
+participant MajorController
+participant MajorService
+participant MajorDao
+管理员->参评专业信息页面:进入界面
+activate 参评专业信息页面
+参评专业信息页面->MajorController:分页查询所有参评专业信息
+activate MajorController
+MajorController->MajorService:当前页数和显示条数
+activate MajorService
+MajorService->MajorDao:查询全部参评专业
+activate MajorDao
+MajorDao-->MajorService:返回查询到数据
+deactivate MajorDao
+MajorService-->MajorController:获得参评专业信息
+deactivate MajorService
+MajorController-->参评专业信息页面:获得参评专业信息
+deactivate MajorController
+参评专业信息页面-->管理员:分页显示参评专业信息
+deactivate 参评专业信息页面
 
-管理员->项目信息页面:点击删除专家
-activate 项目信息页面
-项目信息页面->ProjectController:得到删除的项目id
-activate ProjectController
-ProjectController->ProjectService:项目id
-activate ProjectService
-ProjectService->ProjectDao:根据项目id删除信息
-activate ProjectDao
-ProjectDao-->ProjectService:返回删除情况
-deactivate ProjectDao
-ProjectService-->ProjectController:返回删除情况
-deactivate ProjectService
-ProjectController-->项目信息页面:返回删除情况
-deactivate ProjectController
-项目信息页面-->管理员:显示删除情况
-deactivate 项目信息页面
+管理员->参评专业信息页面:选择停用
+activate 参评专业信息页面
+参评专业信息页面->MajorController:得到停用的参评专业id
+activate MajorController
+MajorController->MajorService:参评专业id
+activate MajorService
+MajorService->MajorDao:根据参评专业id停用信息
+activate MajorDao
+deactivate MajorDao
+deactivate MajorService
+deactivate MajorController
+deactivate 参评专业信息页面
 @enduml

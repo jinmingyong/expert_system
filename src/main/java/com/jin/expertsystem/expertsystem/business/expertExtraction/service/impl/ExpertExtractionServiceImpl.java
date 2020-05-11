@@ -99,7 +99,7 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public String sendSms(SendSmsParam sendSmsParam, HttpServletRequest request) throws MessagingException {
+    public String sendSms(SendSmsParam sendSmsParam, HttpServletRequest request) {
         String token = request.getHeader(requestHeader);
         String realToken = token.substring(tokenHeader.length());
         String userId = jwtTokenUtil.getUserIdFromToken(realToken);
@@ -125,7 +125,7 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
             ResultDetailedInfo r=new ResultDetailedInfo();
             r.setId(Utils.getUUID());
             r.setResId(resId);
-            r.setFlagEmail("3");
+            r.setFlagEmail("2");
             r.setExpId(e.getExpertId());
             for (String id : sendSmsParam.getSendId()
             ) {
@@ -143,8 +143,12 @@ public class ExpertExtractionServiceImpl implements ExpertExtractionService {
                     m.setStatus(0);
                     messageManageList.add(m);
                     Boolean sendStatus = sendSmsService.sendEmail(e.getEmail(),msg);
-                    if (sendStatus == true) r.setFlagEmail("1");
-                    else r.setFlagEmail("0");
+                    if (sendStatus) {
+                        r.setFlagEmail("1");
+                    }
+                    else {
+                        r.setFlagEmail("0");
+                    }
                 }
             }
             list.add(r);

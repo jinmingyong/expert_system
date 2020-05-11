@@ -1,36 +1,42 @@
 @startuml
 actor 管理员
-participant 参评专业信息页面
-participant MajorController
-participant MajorService
-participant MajorDao
-管理员->参评专业信息页面:进入界面
-activate 参评专业信息页面
-参评专业信息页面->MajorController:分页查询所有参评专业信息
-activate MajorController
-MajorController->MajorService:当前页数和显示条数
-activate MajorService
-MajorService->MajorDao:查询全部参评专业
-activate MajorDao
-MajorDao-->MajorService:返回查询到数据
-deactivate MajorDao
-MajorService-->MajorController:获得参评专业信息
-deactivate MajorService
-MajorController-->参评专业信息页面:获得参评专业信息
-deactivate MajorController
-参评专业信息页面-->管理员:分页显示参评专业信息
-deactivate 参评专业信息页面
+participant 用户列表页面
+participant UsersController
+participant UsersService
+participant UsersDao
+管理员->用户列表页面:点击添加用户
+activate 用户列表页面
+管理员->用户列表页面:填写用户名
+用户列表页面->UsersController:获取用户名
+activate UsersController
+UsersController->UsersService:用户名
+activate UsersService
+UsersService->UsersDao:根据用户名查重
+activate UsersDao
+UsersDao-->UsersService:返回是否重复
+deactivate UsersDao
+UsersService-->UsersController:返回是否重复
+deactivate UsersService
+UsersController-->用户列表页面:返回是否重复
+deactivate UsersController
+用户列表页面-->管理员:显示是否重复
+deactivate 用户列表页面
 
-管理员->参评专业信息页面:选择停用
-activate 参评专业信息页面
-参评专业信息页面->MajorController:得到停用的参评专业id
-activate MajorController
-MajorController->MajorService:参评专业id
-activate MajorService
-MajorService->MajorDao:根据参评专业id停用信息
-activate MajorDao
-deactivate MajorDao
-deactivate MajorService
-deactivate MajorController
-deactivate 参评专业信息页面
+管理员->用户列表页面:点击确定
+activate 用户列表页面
+用户列表页面->UsersController:获取用户信息
+activate UsersController
+UsersController->UsersService:获取用户信息
+activate UsersService
+UsersService->UsersDao:新增用户
+activate UsersDao
+UsersService->UsersDao:新增用户角色关系
+UsersDao-->UsersService:返回新增情况
+deactivate UsersDao
+UsersService-->UsersController:返回新增情况
+deactivate UsersService
+UsersController-->用户列表页面:返回新增情况
+deactivate UsersController
+用户列表页面-->管理员:显示新增情况
+deactivate 用户列表页面
 @enduml

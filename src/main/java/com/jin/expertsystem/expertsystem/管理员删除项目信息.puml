@@ -1,42 +1,40 @@
 @startuml
-actor 专家用户
-participant 专家信息页面
-participant ExpertController
-participant ExpertService
-participant ExpertDao
-专家用户->专家信息页面:进入界面
-activate 专家信息页面
-专家信息页面->ExpertController:用户id
-activate ExpertController
-ExpertController->ExpertService:用户id
-activate ExpertService
-ExpertService->ExpertDao:根据专家id查询
-activate ExpertDao
-ExpertDao-->ExpertService:返回查询到数据
-deactivate ExpertDao
-ExpertService-->ExpertController:获得专家信息
-deactivate ExpertService
-ExpertController-->专家信息页面:获得专家信息
-deactivate ExpertController
-专家信息页面-->专家用户:显示专家信息
-deactivate 专家信息页面
+actor 管理员
+participant 项目信息页面
+participant ProjectController
+participant ProjectService
+participant ProjectDao
+管理员->项目信息页面:进入界面
+activate 项目信息页面
+项目信息页面->ProjectController:分页查询所有项目信息
+activate ProjectController
+ProjectController->ProjectService:当前页数和显示条数
+activate ProjectService
+ProjectService->ProjectDao:查询全部项目
+activate ProjectDao
+ProjectDao-->ProjectService:返回查询到数据
+deactivate ProjectDao
+ProjectService-->ProjectController:获得项目信息
+deactivate ProjectService
+ProjectController-->项目信息页面:获得项目信息
+deactivate ProjectController
+项目信息页面-->管理员:分页显示项目信息
+deactivate 项目信息页面
 
-专家用户->专家信息页面:点击添加专家
-activate 专家信息页面
-专家信息页面->ExpertController:填写的专家信息和request
-activate ExpertController
-ExpertController->ExpertService:专家信息和request
-activate ExpertService
-ExpertService->ExpertDao:根据Token获得用户id
-activate ExpertDao
-ExpertDao-->ExpertService:返回用户id
-ExpertService->ExpertDao:添加专家信息
-ExpertDao-->ExpertService:返回添加情况
-deactivate ExpertDao
-ExpertService-->ExpertController:返回添加情况
-deactivate ExpertService
-ExpertController-->专家信息页面:返回添加情况
-deactivate ExpertController
-专家信息页面-->专家用户:显示添加情况
-deactivate 专家信息页面
+管理员->项目信息页面:点击删除专家
+activate 项目信息页面
+项目信息页面->ProjectController:得到删除的项目id
+activate ProjectController
+ProjectController->ProjectService:项目id
+activate ProjectService
+ProjectService->ProjectDao:根据项目id删除信息
+activate ProjectDao
+ProjectDao-->ProjectService:返回删除情况
+deactivate ProjectDao
+ProjectService-->ProjectController:返回删除情况
+deactivate ProjectService
+ProjectController-->项目信息页面:返回删除情况
+deactivate ProjectController
+项目信息页面-->管理员:显示删除情况
+deactivate 项目信息页面
 @enduml

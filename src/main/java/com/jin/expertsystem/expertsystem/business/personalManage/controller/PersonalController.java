@@ -24,7 +24,7 @@ public class PersonalController {
     @Autowired
     private PersonalService personalService;
 
-    @ApiOperation(value = "通过token获取用户信息", notes = "通过登录名获取用户信息")
+    @ApiOperation(value = "通过token获取用户信息")
     @GetMapping(value = "getUserInfoByToken")
     public Result getUserInfoByToken(HttpServletRequest request) {
         return Result.result(personalService.selectUserInfoByToken(request));
