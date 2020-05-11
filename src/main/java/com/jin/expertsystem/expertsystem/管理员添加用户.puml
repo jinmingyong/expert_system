@@ -1,0 +1,36 @@
+@startuml
+actor 管理员
+participant 参评专业信息页面
+participant MajorController
+participant MajorService
+participant MajorDao
+管理员->参评专业信息页面:进入界面
+activate 参评专业信息页面
+参评专业信息页面->MajorController:分页查询所有参评专业信息
+activate MajorController
+MajorController->MajorService:当前页数和显示条数
+activate MajorService
+MajorService->MajorDao:查询全部参评专业
+activate MajorDao
+MajorDao-->MajorService:返回查询到数据
+deactivate MajorDao
+MajorService-->MajorController:获得参评专业信息
+deactivate MajorService
+MajorController-->参评专业信息页面:获得参评专业信息
+deactivate MajorController
+参评专业信息页面-->管理员:分页显示参评专业信息
+deactivate 参评专业信息页面
+
+管理员->参评专业信息页面:选择停用
+activate 参评专业信息页面
+参评专业信息页面->MajorController:得到停用的参评专业id
+activate MajorController
+MajorController->MajorService:参评专业id
+activate MajorService
+MajorService->MajorDao:根据参评专业id停用信息
+activate MajorDao
+deactivate MajorDao
+deactivate MajorService
+deactivate MajorController
+deactivate 参评专业信息页面
+@enduml

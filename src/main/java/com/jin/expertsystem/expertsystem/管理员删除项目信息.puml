@@ -1,0 +1,42 @@
+@startuml
+actor 专家用户
+participant 专家信息页面
+participant ExpertController
+participant ExpertService
+participant ExpertDao
+专家用户->专家信息页面:进入界面
+activate 专家信息页面
+专家信息页面->ExpertController:用户id
+activate ExpertController
+ExpertController->ExpertService:用户id
+activate ExpertService
+ExpertService->ExpertDao:根据专家id查询
+activate ExpertDao
+ExpertDao-->ExpertService:返回查询到数据
+deactivate ExpertDao
+ExpertService-->ExpertController:获得专家信息
+deactivate ExpertService
+ExpertController-->专家信息页面:获得专家信息
+deactivate ExpertController
+专家信息页面-->专家用户:显示专家信息
+deactivate 专家信息页面
+
+专家用户->专家信息页面:点击添加专家
+activate 专家信息页面
+专家信息页面->ExpertController:填写的专家信息和request
+activate ExpertController
+ExpertController->ExpertService:专家信息和request
+activate ExpertService
+ExpertService->ExpertDao:根据Token获得用户id
+activate ExpertDao
+ExpertDao-->ExpertService:返回用户id
+ExpertService->ExpertDao:添加专家信息
+ExpertDao-->ExpertService:返回添加情况
+deactivate ExpertDao
+ExpertService-->ExpertController:返回添加情况
+deactivate ExpertService
+ExpertController-->专家信息页面:返回添加情况
+deactivate ExpertController
+专家信息页面-->专家用户:显示添加情况
+deactivate 专家信息页面
+@enduml
